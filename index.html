@@ -3,33 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0459d6">
-<title>MeterHisab | Smart Meter Recharge Expense Checker</title>
+<meta name="theme-color" content="#0A2540">
+<title>MeterHisab 2.0 | Smart Meter Recharge Expense Estimator</title>
 <style>
 :root {
-  --blue: #0459d6;
-  --blue-dark: #0242a3;
-  --blue-soft: #ecf3ff;
-  --blue-border: #adcaff;
-  --green: #137a43;
-  --green-soft: #eaf8f0;
-  --green-border: #b8e4c9;
-  --amber: #935300;
-  --amber-soft: #fff7e8;
-  --amber-border: #f3d296;
-  --red: #b42318;
-  --red-soft: #fef2f1;
-  --red-border: #f5bfb9;
-  --ink: #101828;
-  --ink-mid: #344054;
-  --muted: #5e6b7c;
-  --line: #dce3ec;
-  --bg: #f3f6fb;
-  --card: #ffffff;
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-  --shadow: 0 6px 24px rgba(16, 24, 40, 0.06);
+  --navy: #0A2540;
+  --navy-mid: #1E3A5F;
+  --blue: #0066FF;
+  --blue-dark: #004ECC;
+  --blue-soft: #EEF4FF;
+  --blue-border: #BDD6FF;
+  --green: #0E7A46;
+  --green-soft: #EAFAF1;
+  --green-border: #B3E6C9;
+  --amber: #945200;
+  --amber-soft: #FFF8EB;
+  --amber-border: #F5D491;
+  --red: #B42318;
+  --red-soft: #FEF2F1;
+  --red-border: #F6C2BD;
+  --ink: #0F172A;
+  --ink-mid: #334155;
+  --muted: #596779;
+  --line: #DDE4EE;
+  --bg: #F4F7FB;
+  --card: #FFFFFF;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.04);
+  --shadow-md: 0 8px 24px rgba(10, 37, 64, 0.06);
 }
 
 * {
@@ -46,7 +50,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Noto Sans Bengali", Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.55;
   overflow-x: hidden;
 }
@@ -61,41 +65,54 @@ button {
 }
 
 .wrap {
-  width: min(760px, 100% - 28px);
+  width: min(780px, calc(100% - 24px));
   margin: 0 auto;
 }
 
-/* Sticky Top Navigation & Language Selector */
+/* 1. Compact Premium Header & 2. Language Selector */
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: rgba(255, 255, 255, 0.96);
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
 
 .topinner {
-  padding: 12px 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .toprow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .brand {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 850;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.4px;
+  color: var(--navy);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .brand span {
@@ -103,30 +120,31 @@ button {
 }
 
 .badge-tag {
-  font-size: 12px;
-  font-weight: 750;
+  font-size: 11px;
+  font-weight: 700;
   background: var(--blue-soft);
   color: var(--blue-dark);
   border: 1px solid var(--blue-border);
-  padding: 4px 10px;
+  padding: 4px 9px;
   border-radius: 999px;
+  text-align: right;
 }
 
 .languages {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
+  gap: 5px;
 }
 
 .lang {
-  min-height: 44px;
+  min-height: 40px;
   border: 1.5px solid var(--line);
-  background: #ffffff;
+  background: #FFFFFF;
   color: var(--ink-mid);
-  border-radius: 10px;
-  padding: 6px 4px;
-  font-size: 14px;
-  font-weight: 750;
+  border-radius: var(--radius-sm);
+  padding: 4px 2px;
+  font-size: 13px;
+  font-weight: 700;
   text-align: center;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
@@ -136,123 +154,151 @@ button {
 }
 
 .lang.active {
-  background: var(--blue-soft);
-  border-color: var(--blue);
-  color: var(--blue-dark);
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #FFFFFF;
 }
 
-/* Main Layout */
+/* Main Content */
 main {
-  padding: 20px 0 48px;
+  padding: 16px 0 48px;
 }
 
+/* 3. Hero Section */
 .hero {
-  padding: 16px 2px 14px;
+  background: var(--navy);
+  color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-md);
 }
 
 .eyebrow {
-  color: var(--blue);
-  font-size: 14px;
+  color: #8AB8FF;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
 }
 
 .hero h1 {
-  font-size: clamp(26px, 5.8vw, 38px);
-  line-height: 1.18;
-  letter-spacing: -0.8px;
-  margin: 8px 0 12px;
+  font-size: clamp(22px, 5vw, 31px);
+  line-height: 1.22;
+  letter-spacing: -0.5px;
+  margin: 6px 0 10px;
+  color: #FFFFFF;
 }
 
 .hero p {
-  color: var(--ink-mid);
+  color: #D0DFEE;
   margin: 0 0 14px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .trust {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--green-soft);
-  color: var(--green);
-  border: 1px solid var(--green-border);
-  padding: 9px 14px;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.11);
+  color: #EAF3FF;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 6px 12px;
   border-radius: 999px;
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 12.5px;
 }
 
 /* Cards & Form Controls */
 .card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 20px;
   margin: 14px 0;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
 }
 
 .section-title {
-  font-size: 21px;
-  font-weight: 850;
-  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin: -8px 0 14px;
 }
 
 .field {
-  margin: 18px 0;
+  margin: 16px 0;
 }
 
 .field label {
   display: block;
-  font-weight: 800;
-  margin-bottom: 8px;
+  font-weight: 750;
+  font-size: 15px;
+  margin-bottom: 7px;
   color: var(--ink);
 }
 
 .hint {
   display: block;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 6px;
 }
 
 .control {
   width: 100%;
-  min-height: 56px;
-  border: 1.5px solid #c6d0de;
+  min-height: 52px;
+  border: 1.5px solid #C5D0DF;
   border-radius: var(--radius-md);
-  padding: 12px 14px;
-  background: #ffffff;
+  padding: 10px 14px;
+  background: #FFFFFF;
   color: var(--ink);
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 650;
   outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .control:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 4px rgba(4, 89, 214, 0.14);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
 }
 
 .money-wrap {
   display: flex;
   align-items: center;
-  border: 1.5px solid #c6d0de;
+  border: 1.5px solid #C5D0DF;
   border-radius: var(--radius-md);
   padding-left: 14px;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 
 .money-wrap:focus-within {
   border-color: var(--blue);
-  box-shadow: 0 0 0 4px rgba(4, 89, 214, 0.14);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
 }
 
 .money-symbol {
-  font-size: 23px;
-  font-weight: 850;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--ink-mid);
   user-select: none;
 }
@@ -267,23 +313,25 @@ main {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .quick button {
-  min-height: 46px;
-  border: 1.5px solid #c6d0de;
-  background: #ffffff;
-  border-radius: 11px;
-  padding: 8px 6px;
+  min-height: 44px;
+  border: 1.5px solid var(--line);
+  background: #F8FAFC;
+  border-radius: 10px;
+  padding: 6px 4px;
   font-weight: 750;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--ink-mid);
+  transition: all 0.15s ease;
 }
 
 .quick button:hover {
   border-color: var(--blue);
   color: var(--blue);
+  background: var(--blue-soft);
 }
 
 .quick button:active, .choice:active {
@@ -297,14 +345,16 @@ main {
 }
 
 .choice {
-  min-height: 54px;
-  border: 1.5px solid #c6d0de;
-  background: #ffffff;
-  border-radius: 12px;
+  min-height: 50px;
+  border: 1.5px solid #C5D0DF;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
   padding: 10px 12px;
-  font-weight: 750;
+  font-weight: 700;
+  font-size: 14.5px;
   color: var(--ink-mid);
   text-align: center;
+  transition: all 0.15s ease;
 }
 
 .choice.selected {
@@ -315,16 +365,17 @@ main {
 
 .primary {
   width: 100%;
-  min-height: 60px;
+  min-height: 56px;
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--blue);
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 850;
-  padding: 14px 18px;
-  box-shadow: 0 6px 16px rgba(4, 89, 214, 0.24);
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 12px 18px;
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.22);
   margin-top: 6px;
+  transition: background 0.15s ease;
 }
 
 .primary:hover {
@@ -335,31 +386,31 @@ main {
   background: var(--red-soft);
   border: 1px solid var(--red-border);
   color: var(--red);
-  font-size: 16px;
+  font-size: 14.5px;
   font-weight: 700;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-top: 12px;
   display: none;
 }
 
-/* Result Section */
+/* 6. Result Dashboard & 7. Analytics */
 .result {
   display: none;
 }
 
 .result.show {
   display: block;
-  animation: rise 0.3s ease;
+  animation: rise 0.25s ease;
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 }
 
 .health {
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 18px;
   border: 1.5px solid;
 }
@@ -384,36 +435,37 @@ main {
 
 .health-badge {
   display: inline-block;
-  font-size: 13px;
+  font-size: 11.5px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.4px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.82);
   margin-bottom: 8px;
 }
 
 .health h2 {
-  font-size: 23px;
+  font-size: 20px;
   line-height: 1.25;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 }
 
 .health p {
   margin: 0;
-  font-size: 16px;
+  font-size: 14.5px;
 }
 
 .big-number {
-  font-size: clamp(32px, 7vw, 42px);
+  font-size: clamp(28px, 6.5vw, 38px);
   font-weight: 900;
-  letter-spacing: -0.8px;
-  margin: 8px 0 2px;
+  letter-spacing: -0.7px;
+  margin: 6px 0;
   word-break: break-word;
 }
 
-.stats {
+/* 4-KPI Financial Grid */
+.kpi-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
@@ -421,7 +473,7 @@ main {
 }
 
 .stat {
-  background: #f8fafd;
+  background: #F8FAFC;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 13px;
@@ -430,27 +482,188 @@ main {
 .stat small {
   display: block;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 650;
   margin-bottom: 4px;
 }
 
 .stat strong {
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 850;
+  color: var(--navy);
   word-break: break-word;
 }
 
+/* Estimate Band Meter */
+.band-meter-box {
+  margin-top: 14px;
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.band-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--ink-mid);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.band-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #16A34A 0%, #16A34A 33%, #D97706 33%, #D97706 66%, #DC2626 66%, #DC2626 100%);
+  overflow: visible;
+}
+
+.band-marker {
+  position: absolute;
+  top: -5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  transform: translateX(-50%);
+  transition: left 0.3s ease;
+}
+
+.band-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-weight: 650;
+}
+
+/* 8. 30-Day Cumulative Projection SVG Chart */
+.chart-box {
+  margin-top: 16px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.chart-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+}
+
+.chart-tag {
+  font-size: 11px;
+  font-weight: 750;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.svg-chart-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.svg-chart-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-milestones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.milestone {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  text-align: center;
+}
+
+.milestone span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.milestone strong {
+  font-size: 14px;
+  color: var(--navy);
+  font-weight: 800;
+}
+
+/* 9. Smart Expense Insights */
+.insights-box {
+  margin-top: 16px;
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.insights-box h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 10px;
+}
+
+.insight-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.insight-item {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+/* Breakdown Table */
 .breakdown {
-  margin-top: 18px;
-  background: #fafbfd;
+  margin-top: 16px;
+  background: #FAFBFD;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 15px;
 }
 
 .breakdown h3, .appliance h3, .warning-box h3 {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 800;
   margin: 0 0 10px;
 }
 
@@ -459,14 +672,14 @@ main {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  padding: 10px 0;
+  padding: 9px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 16px;
+  font-size: 14.5px;
 }
 
 .rowline:last-child {
   border-bottom: 0;
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .rowline strong {
@@ -474,39 +687,41 @@ main {
   flex-shrink: 0;
 }
 
+/* 12. Household Load Context & 13. Prepaid Disclaimer */
 .appliance {
   background: var(--blue-soft);
   border: 1px solid var(--blue-border);
   border-radius: var(--radius-md);
   padding: 15px;
   margin-top: 14px;
-  color: #102a56;
+  color: #102A56;
 }
 
 .appliance p, .warning-box p {
   margin: 0;
-  font-size: 16px;
+  font-size: 14.5px;
 }
 
 .warning-box {
-  background: #fff9eb;
-  border: 1.5px solid #f2cf88;
+  background: var(--amber-soft);
+  border: 1.5px solid var(--amber-border);
   border-radius: var(--radius-md);
   padding: 15px;
   margin-top: 14px;
-  color: #5f3700;
+  color: #5F3700;
 }
 
 .warning-list {
   margin: 8px 0 0;
-  padding-left: 20px;
-  font-size: 15px;
+  padding-left: 18px;
+  font-size: 14px;
 }
 
 .warning-list li {
   margin-bottom: 6px;
 }
 
+/* 14. Sharing & 15. Ledger Actions */
 .actions {
   display: grid;
   gap: 10px;
@@ -516,11 +731,11 @@ main {
 .action {
   border: 0;
   border-radius: var(--radius-md);
-  padding: 14px 16px;
-  font-weight: 850;
-  font-size: 17px;
-  color: #ffffff;
-  min-height: 56px;
+  padding: 13px 16px;
+  font-weight: 800;
+  font-size: 15.5px;
+  color: #FFFFFF;
+  min-height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -528,31 +743,216 @@ main {
   text-align: center;
 }
 
-.whatsapp { background: #137a43; }
-.whatsapp:hover { background: #0e6034; }
-.share { background: #0459d6; }
-.share:hover { background: #0242a3; }
-.download { background: #b85d00; }
-.download:hover { background: #934a00; }
+.whatsapp { background: var(--green); }
+.whatsapp:hover { background: #0A5E35; }
+.share { background: var(--blue); }
+.share:hover { background: var(--blue-dark); }
+.download { background: var(--navy); }
+.download:hover { background: var(--navy-mid); }
 .secondary {
-  background: #ffffff;
+  background: #FFFFFF;
   color: var(--ink-mid);
-  border: 1.5px solid #c6d0de;
+  border: 1.5px solid #C5D0DF;
 }
 .secondary:hover {
-  border-color: var(--ink-mid);
+  border-color: var(--navy);
+  color: var(--navy);
 }
 
-/* Preview Modal for Android WebView / Fallback */
+/* 10. Calculation History & 11. Compare Calculations */
+.history-empty {
+  background: #F8FAFC;
+  border: 1px dashed #C5D0DF;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.history-item {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.history-main {
+  font-weight: 800;
+  font-size: 15.5px;
+  color: var(--navy);
+}
+
+.history-meta {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.history-btns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mini-btn {
+  min-height: 36px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #C5D0DF;
+  background: #FFFFFF;
+  color: var(--ink-mid);
+  font-size: 12.5px;
+  font-weight: 750;
+}
+
+.mini-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.mini-btn.danger-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.confirm-bar {
+  background: var(--red-soft);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.confirm-bar span {
+  font-size: 13.5px;
+  font-weight: 750;
+  color: var(--red);
+}
+
+/* Comparison Grid */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.compare-col {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.compare-col h3 {
+  margin: 0 0 10px;
+  font-size: 15.5px;
+  color: var(--navy);
+}
+
+.compare-field {
+  margin-bottom: 10px;
+}
+
+.compare-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--ink-mid);
+}
+
+.compare-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1.5px solid #C5D0DF;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 650;
+  background: #FFFFFF;
+}
+
+.compare-results {
+  margin-top: 14px;
+  background: #FAFBFD;
+  border: 1.5px solid var(--blue-border);
+  border-radius: var(--radius-md);
+  padding: 15px;
+  display: none;
+}
+
+.compare-results.show {
+  display: block;
+}
+
+.compare-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  margin-bottom: 12px;
+}
+
+.compare-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.compare-table th, .compare-table td {
+  padding: 9px 5px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.compare-table th {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 12.5px;
+}
+
+.compare-table td:not(:first-child), .compare-table th:not(:first-child) {
+  text-align: right;
+  font-weight: 750;
+}
+
+/* Modal & Toast */
 .modal-backdrop {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(16, 24, 40, 0.65);
+  background: rgba(10, 37, 64, 0.65);
   display: none;
-align-items: center;
+  align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 14px;
 }
 
 .modal-backdrop.open {
@@ -560,12 +960,12 @@ align-items: center;
 }
 
 .modal-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
   width: min(560px, 100%);
   max-height: 90vh;
   overflow-y: auto;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -579,17 +979,18 @@ align-items: center;
 
 .modal-header h3 {
   margin: 0;
-  font-size: 19px;
+  font-size: 18px;
+  color: var(--navy);
 }
 
 .close-btn {
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 42px;
+  min-width: 42px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: #f8fafd;
+  background: #F8FAFC;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .modal-preview-img {
@@ -602,14 +1003,14 @@ align-items: center;
 
 .modal-textarea {
   width: 100%;
-  min-height: 260px;
-  border: 1.5px solid #c6d0de;
+  min-height: 250px;
+  border: 1.5px solid #C5D0DF;
   border-radius: 12px;
   padding: 12px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--ink);
-  background: #f8fafd;
+  background: #F8FAFC;
   resize: vertical;
 }
 
@@ -625,11 +1026,11 @@ align-items: center;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #101828;
-  color: #ffffff;
-  padding: 12px 18px;
+  background: var(--navy);
+  color: #FFFFFF;
+  padding: 11px 18px;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 750;
   z-index: 60;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
@@ -643,14 +1044,16 @@ align-items: center;
 .footer {
   text-align: center;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   padding: 14px 0 32px;
+  line-height: 1.5;
 }
 
 .hidden {
   display: none !important;
 }
 
+/* Tablet & Desktop Enhancements */
 @media (min-width: 640px) {
   .topinner {
     flex-direction: row;
@@ -662,7 +1065,13 @@ align-items: center;
     gap: 6px;
   }
   .lang {
-    padding: 8px 12px;
+    padding: 7px 12px;
+  }
+  .kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .compare-grid {
+    grid-template-columns: 1fr 1fr;
   }
   .actions {
     grid-template-columns: 1fr 1fr;
@@ -672,25 +1081,22 @@ align-items: center;
   }
 }
 
-/* Strict 360px Mobile Safeguards */
+/* Strict 320px - 400px Mobile Safeguards */
 @media (max-width: 400px) {
-  body {
-    font-size: 17px;
-  }
   .wrap {
-    width: calc(100% - 20px);
+    width: calc(100% - 16px);
   }
-  .card {
-    padding: 15px;
+  .card, .hero {
+    padding: 14px;
   }
   .languages {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 4px;
+    gap: 3px;
   }
   .lang {
-    font-size: 12px;
-    padding: 5px 2px;
-    min-height: 42px;
+    font-size: 11.5px;
+    padding: 4px 1px;
+    min-height: 38px;
   }
   .quick {
     grid-template-columns: repeat(2, 1fr);
@@ -698,21 +1104,37 @@ align-items: center;
   .choices {
     grid-template-columns: 1fr;
   }
-  .stats {
-    grid-template-columns: 1fr;
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chart-milestones {
+    grid-template-columns: repeat(2, 1fr);
   }
   .modal-actions {
     grid-template-columns: 1fr;
+  }
+  .compare-results {
+    padding: 10px;
+  }
+  .compare-table {
+    font-size: 11.5px;
+  }
+  .compare-table th, .compare-table td {
+    padding: 7px 3px;
   }
 }
 </style>
 </head>
 <body>
 
+<!-- 1. Compact Premium Header & 2. Language Selector -->
 <header class="topbar">
   <div class="wrap topinner">
     <div class="toprow">
-      <div class="brand">⚡ Meter<span>Hisab</span></div>
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">⚡</span>
+        <div>Meter<span>Hisab</span></div>
+      </div>
       <span class="badge-tag" data-i18n="topBadge">Prepaid Recharge Tracker</span>
     </div>
     <nav aria-label="Language selection" class="languages" id="languageBar">
@@ -726,6 +1148,7 @@ align-items: center;
 </header>
 
 <main class="wrap">
+  <!-- 3. Hero Section -->
   <section class="hero">
     <div class="eyebrow" data-i18n="eyebrow">SMART METER RECHARGE EXPENSE CHECKER</div>
     <h1 data-i18n="headline">Recharge balance reducing quickly? Check your daily recharge expense in 1 minute.</h1>
@@ -733,11 +1156,14 @@ align-items: center;
     <div class="trust">✓ <span data-i18n="trust">100% Free • No Login • Works Offline on Phone</span></div>
   </section>
 
+  <!-- 4. Recharge Input Form & 5. Main Calculate Button -->
   <section class="card" aria-labelledby="formTitle">
-    <h2 class="section-title" id="formTitle" data-i18n="formTitle">🔎 Enter your recharge details</h2>
+    <div class="section-header">
+      <h2 class="section-title" id="formTitle" data-i18n="formTitle">Enter your recharge details</h2>
+    </div>
     <form id="meterForm" novalidate>
       <div class="field">
-        <label for="board" data-i18n="boardLabel">⚡ 1. Select your state / electricity board</label>
+        <label for="board" data-i18n="boardLabel">1. Select your state / electricity board</label>
         <select class="control" id="board">
           <option value="APDCL" data-i18n-opt="board_APDCL">Assam (APDCL)</option>
           <option value="SBPDCL" data-i18n-opt="board_SBPDCL">Bihar (SBPDCL)</option>
@@ -752,7 +1178,7 @@ align-items: center;
       </div>
 
       <div class="field">
-        <label for="amount" data-i18n="amountLabel">💰 2. How much did you recharge? (₹)</label>
+        <label for="amount" data-i18n="amountLabel">2. How much did you recharge? (₹)</label>
         <div class="money-wrap">
           <span class="money-symbol">₹</span>
           <input class="control" id="amount" type="number" inputmode="decimal" min="1" max="100000" step="0.01" value="500" required>
@@ -764,9 +1190,9 @@ align-items: center;
           <button type="button" data-amount="1000">₹1,000</button>
         </div>
       </div>
-      
+
       <div class="field">
-        <label for="days" data-i18n="daysLabel">📅 3. How many days did this recharge last?</label>
+        <label for="days" data-i18n="daysLabel">3. How many days did this recharge last?</label>
         <input class="control" id="days" type="number" inputmode="numeric" min="1" max="365" step="1" value="10" required>
         <div class="quick">
           <button type="button" data-days="5">5</button>
@@ -777,7 +1203,7 @@ align-items: center;
       </div>
 
       <div class="field">
-        <label data-i18n="applianceLabel">🏠 4. Do you use an AC or a large water motor? (Optional)</label>
+        <label data-i18n="applianceLabel">4. Do you use an AC or a large water motor? (Optional)</label>
         <div class="choices" role="group" aria-label="Appliance selection">
           <button type="button" class="choice selected" data-appliance="no" aria-pressed="true" data-i18n="no">No, only fans / lights / TV</button>
           <button type="button" class="choice" data-appliance="yes" aria-pressed="false" data-i18n="yes">Yes, AC or large motor</button>
@@ -785,58 +1211,126 @@ align-items: center;
         <span class="hint" data-i18n="applianceHint">Used for load guidance below. Does not alter your measured recharge math.</span>
       </div>
 
-      <button class="primary" type="submit" id="submitBtn" data-i18n="check">🔍 Check My Meter Hisab</button>
+      <button class="primary" type="submit" id="submitBtn" data-i18n="check">Check My Meter Hisab</button>
       <div class="error" id="errorBox" role="alert" data-i18n="error">Please enter a valid recharge amount (₹1 to ₹1,00,000) and whole days (1 to 365).</div>
     </form>
   </section>
 
+  <!-- 6. Result Dashboard, 7. Analytics, 8. 30-Day Projection Chart, 9. Smart Insights -->
   <section class="result" id="resultSection" aria-live="polite">
     <div class="card">
+      <!-- Status Band Header -->
       <div class="health warn" id="healthCard">
         <span class="health-badge" id="healthBadge">ESTIMATE ONLY • NOT AN OFFICIAL BILL</span>
-        <h2 id="healthTitle">Moderate Daily Recharge Deduction</h2>
-        <div class="big-number" id="dailySpend">₹50.00 / day</div>
+        <h2 id="healthTitle">Moderate Daily Recharge Deduction Rate</h2>
+        <div class="big-number" id="dailySpend">₹50 / day</div>
         <p id="healthText"></p>
       </div>
 
-      <div class="stats">
+      <!-- 4-Card KPI Financial Overview -->
+      <div class="kpi-grid">
         <div class="stat">
-          <small data-i18n="statMonthly">📅 30-Day Recharge Projection</small>
-          <strong id="monthlySpend">₹1,500.00</strong>
+          <small data-i18n="kpiDaily">Average Daily Deduction</small>
+          <strong id="kpiDailyVal">₹50 / day</strong>
         </div>
         <div class="stat">
-          <small data-i18n="statDays">⌛ Recharge Duration</small>
+          <small data-i18n="statMonthly">30-Day Recharge Projection</small>
+          <strong id="monthlySpend">₹1,500</strong>
+        </div>
+        <div class="stat">
+          <small data-i18n="rechargeAmount">Recharge Amount Paid</small>
+          <strong id="kpiAmountVal">₹500</strong>
+        </div>
+        <div class="stat">
+          <small data-i18n="statDays">Recharge Duration</small>
           <strong id="daysShown">10 days</strong>
         </div>
       </div>
 
+      <!-- 7. Daily Deduction Analytics Band Meter -->
+      <div class="band-meter-box">
+        <div class="band-header">
+          <span data-i18n="bandScaleTitle">Internal Daily Estimate Band (Not an Official Board Classification)</span>
+          <strong id="bandCurrentLabel">₹50 / day</strong>
+        </div>
+        <div class="band-bar" aria-hidden="true">
+          <div class="band-marker" id="bandMarker" style="left: 50%;"></div>
+        </div>
+        <div class="band-labels">
+          <span data-i18n="bandLow">Low (&lt; ₹25/d)</span>
+          <span data-i18n="bandMod">Moderate (₹25–₹60/d)</span>
+          <span data-i18n="bandHigh">High (&gt; ₹60/d)</span>
+        </div>
+      </div>
+
+      <!-- 8. Visual 30-Day Cumulative Expense Projection -->
+      <div class="chart-box">
+        <div class="chart-header">
+          <h3 data-i18n="chartTitle">30-Day Cumulative Recharge Projection</h3>
+          <span class="chart-tag" data-i18n="chartBadge">Mathematical Projection • Not an Actual Bill</span>
+        </div>
+        <div class="svg-chart-wrap" id="projectionChartWrap" role="img" aria-label="30-day cumulative recharge expense projection chart"></div>
+        <div class="chart-milestones">
+          <div class="milestone">
+            <span data-i18n="day1Label">Day 1</span>
+            <strong id="mDay1">₹50</strong>
+          </div>
+          <div class="milestone">
+            <span data-i18n="day7Label">Day 7</span>
+            <strong id="mDay7">₹350</strong>
+          </div>
+          <div class="milestone">
+            <span data-i18n="day15Label">Day 15</span>
+            <strong id="mDay15">₹750</strong>
+          </div>
+          <div class="milestone">
+            <span data-i18n="day30Label">Day 30</span>
+            <strong id="mDay30">₹1,500</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Smart Expense Insights -->
+      <div class="insights-box">
+        <h3 data-i18n="insightsTitle">Smart Recharge Expense Insights</h3>
+        <ul class="insight-list" id="insightsList">
+          <li class="insight-item" id="insight1"></li>
+          <li class="insight-item" id="insight2"></li>
+          <li class="insight-item" id="insight3"></li>
+          <li class="insight-item" id="insight4"></li>
+        </ul>
+      </div>
+
+      <!-- Detailed Breakdown -->
       <div class="breakdown">
-        <h3 data-i18n="breakTitle">🧾 Prepaid Recharge Math Breakdown</h3>
+        <h3 data-i18n="breakTitle">Prepaid Recharge Math Breakdown</h3>
         <div class="rowline">
           <span data-i18n="boardRow">Electricity Board</span>
           <strong id="boardShown">Assam (APDCL)</strong>
         </div>
         <div class="rowline">
           <span data-i18n="rechargeAmount">Recharge Amount Paid</span>
-          <strong id="amountShown">₹500.00</strong>
+          <strong id="amountShown">₹500</strong>
         </div>
         <div class="rowline">
           <span data-i18n="dailyRate">Average Recharge Deducted / Day</span>
-          <strong id="rateShown">₹50.00 / day</strong>
+          <strong id="rateShown">₹50 / day</strong>
         </div>
         <div class="rowline">
           <span data-i18n="monthlyProjection">Estimated 30-Day Recharge Spend</span>
-          <strong id="projectionShown">₹1,500.00</strong>
+          <strong id="projectionShown">₹1,500</strong>
         </div>
       </div>
 
+      <!-- 12. Household Load Context -->
       <div class="appliance">
-        <h3 data-i18n="applianceTitle">💡 Household Load Context</h3>
+        <h3 data-i18n="applianceTitle">Household Load Context</h3>
         <p id="applianceText"></p>
       </div>
 
+      <!-- 13. Prepaid Deduction Disclaimer -->
       <div class="warning-box">
-        <h3 data-i18n="warningTitle">⚠️ Why Prepaid Balance ≠ Actual Electricity Consumed</h3>
+        <h3 data-i18n="warningTitle">Why Prepaid Balance ≠ Actual Electricity Consumed</h3>
         <ul class="warning-list">
           <li data-i18n="warnPoint1">Prepaid wallet deductions often include daily fixed demand charges, electricity duty, arrear installments, or slab adjustments alongside unit (kWh) charges.</li>
           <li data-i18n="warnPoint2">A fast recharge deduction speed alone never proves a smart meter is faulty.</li>
@@ -844,12 +1338,123 @@ align-items: center;
         </ul>
       </div>
 
+      <!-- 14. WhatsApp Sharing Actions & 15. Ledger Verification Request -->
       <div class="actions">
-        <button type="button" class="action whatsapp" id="statusBtn" data-i18n="statusBtn">📲 WhatsApp Status Image</button>
-        <button type="button" class="action share" id="shareBtn" data-i18n="shareBtn">👨‍👩‍👧 Share on WhatsApp</button>
-        <button type="button" class="action download" id="letterBtn" data-i18n="letterBtn">📄 Download Ledger Verification Request</button>
-        <button type="button" class="action secondary" id="againBtn" data-i18n="againBtn">↻ Edit Recharge Details</button>
+        <button type="button" class="action whatsapp" id="statusBtn" data-i18n="statusBtn">WhatsApp Status Image</button>
+        <button type="button" class="action share" id="shareBtn" data-i18n="shareBtn">Share on WhatsApp</button>
+        <button type="button" class="action download" id="letterBtn" data-i18n="letterBtn">Download Ledger Verification Request</button>
+        <button type="button" class="action secondary" id="againBtn" data-i18n="againBtn">Edit Recharge Details</button>
       </div>
+    </div>
+  </section>
+
+  <!-- 10. Calculation History Section -->
+  <section class="card" id="historySection" aria-labelledby="historyTitle">
+    <div class="section-header">
+      <h2 class="section-title" id="historyTitle" data-i18n="historyTitle">Recent Calculation History</h2>
+      <button type="button" class="mini-btn danger-btn hidden" id="clearHistoryTriggerBtn" data-i18n="clearAllBtn">Clear All</button>
+    </div>
+    <p class="section-sub" data-i18n="historySub">Stored privately in your browser only (maximum 10 entries). Never sent to any server.</p>
+
+    <div class="confirm-bar hidden" id="clearConfirmBar" role="alert">
+      <span data-i18n="clearConfirmText">Delete all saved calculations from this browser?</span>
+      <div class="history-btns">
+        <button type="button" class="mini-btn danger-btn" id="confirmClearYesBtn" data-i18n="confirmYes">Yes, Delete All</button>
+        <button type="button" class="mini-btn" id="confirmClearNoBtn" data-i18n="confirmNo">Cancel</button>
+      </div>
+    </div>
+
+    <div id="historyEmptyState" class="history-empty" data-i18n="historyEmpty">No saved calculations yet. Run a calculation above to save it here automatically.</div>
+    <div id="historyList" class="history-list"></div>
+  </section>
+
+  <!-- 11. Compare Calculations Section -->
+  <section class="card" id="compareSection" aria-labelledby="compareTitle">
+    <div class="section-header">
+      <h2 class="section-title" id="compareTitle" data-i18n="compareTitle">Compare Two Recharge Calculations</h2>
+    </div>
+    <p class="section-sub" data-i18n="compareSub">Compare two different recharges side by side using manual inputs or saved history entries.</p>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 data-i18n="compareHeaderA">Calculation A (First Recharge)</h3>
+        <div class="compare-field">
+          <label for="compHistoryA" data-i18n="loadFromHistory">Load from saved history (optional)</label>
+          <select id="compHistoryA" class="compare-input">
+            <option value="" data-i18n-opt="manualEntryOpt">-- Manual Entry --</option>
+          </select>
+        </div>
+        <div class="compare-field">
+          <label for="compAmountA" data-i18n="amountLabelShort">Recharge Amount A (₹)</label>
+          <input type="number" id="compAmountA" class="compare-input" min="1" max="100000" step="0.01" value="500">
+        </div>
+        <div class="compare-field">
+          <label for="compDaysA" data-i18n="daysLabelShort">Duration A (Days)</label>
+          <input type="number" id="compDaysA" class="compare-input" min="1" max="365" step="1" value="10">
+        </div>
+      </div>
+
+      <div class="compare-col">
+        <h3 data-i18n="compareHeaderB">Calculation B (Second Recharge)</h3>
+        <div class="compare-field">
+          <label for="compHistoryB" data-i18n="loadFromHistory">Load from saved history (optional)</label>
+          <select id="compHistoryB" class="compare-input">
+            <option value="" data-i18n-opt="manualEntryOpt">-- Manual Entry --</option>
+          </select>
+        </div>
+        <div class="compare-field">
+          <label for="compAmountB" data-i18n="amountLabelShortB">Recharge Amount B (₹)</label>
+          <input type="number" id="compAmountB" class="compare-input" min="1" max="100000" step="0.01" value="500">
+        </div>
+        <div class="compare-field">
+          <label for="compDaysB" data-i18n="daysLabelShortB">Duration B (Days)</label>
+          <input type="number" id="compDaysB" class="compare-input" min="1" max="365" step="1" value="7">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="primary" id="runCompareBtn" data-i18n="runCompareBtn">Compare Recharge Calculations</button>
+    <div class="error" id="compareErrorBox" role="alert" data-i18n="error">Please enter a valid recharge amount (₹1 to ₹1,00,000) and whole days (1 to 365).</div>
+
+    <div class="compare-results" id="compareResultsBox" aria-live="polite">
+      <span class="compare-badge" id="compareSummaryBadge"></span>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th data-i18n="compColMetric">Metric</th>
+            <th data-i18n="compColA">Recharge A</th>
+            <th data-i18n="compColB">Recharge B</th>
+            <th data-i18n="compColDiff">Difference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="rechargeAmount">Recharge Amount Paid</td>
+            <td id="compValAmountA">₹500</td>
+            <td id="compValAmountB">₹500</td>
+            <td id="compDiffAmount">₹0</td>
+          </tr>
+          <tr>
+            <td data-i18n="statDays">Recharge Duration</td>
+            <td id="compValDaysA">10 days</td>
+            <td id="compValDaysB">7 days</td>
+            <td id="compDiffDays">3 days</td>
+          </tr>
+          <tr>
+            <td data-i18n="kpiDaily">Average Daily Deduction</td>
+            <td id="compValDailyA">₹50 / day</td>
+            <td id="compValDailyB">₹71.43 / day</td>
+            <td id="compDiffDaily">₹21.43 / day</td>
+          </tr>
+          <tr>
+            <td data-i18n="statMonthly">30-Day Recharge Projection</td>
+            <td id="compValMonthlyA">₹1,500</td>
+            <td id="compValMonthlyB">₹2,142.86</td>
+            <td id="compDiffMonthly">₹642.86</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="hint" style="margin-top: 10px;" data-i18n="compareDisclaimer">Note: A higher daily recharge deduction reflects faster prepaid balance depletion (which may include fixed charges or arrear adjustments) and is not proof of higher kWh electricity consumption.</p>
     </div>
   </section>
 </main>
@@ -865,16 +1470,16 @@ align-items: center;
       <img id="modalPreviewImage" class="modal-preview-img" alt="MeterHisab Status Card">
       <span class="hint" data-i18n="imageModalHint">Tip: If download does not start on your phone browser, long-press the image above to save or share it.</span>
       <div class="modal-actions">
-        <button type="button" class="action whatsapp" id="downloadImgDirectBtn" data-i18n="saveImageBtn">⬇ Save Image</button>
-        <button type="button" class="action share" id="shareImgDirectBtn" data-i18n="shareImageBtn">📤 Share Image</button>
+        <button type="button" class="action whatsapp" id="downloadImgDirectBtn" data-i18n="saveImageBtn">Save Image</button>
+        <button type="button" class="action share" id="shareImgDirectBtn" data-i18n="shareImageBtn">Share Image</button>
       </div>
     </div>
     <div id="modalTextContainer" class="hidden">
       <textarea id="modalLetterTextarea" class="modal-textarea" readonly></textarea>
       <span class="hint" data-i18n="letterModalHint">You can download this verification application as a text file or copy it directly to paste in WhatsApp/Email.</span>
       <div class="modal-actions">
-        <button type="button" class="action download" id="downloadTxtDirectBtn" data-i18n="saveTxtBtn">⬇ Download .TXT</button>
-        <button type="button" class="action share" id="copyTxtDirectBtn" data-i18n="copyTxtBtn">📋 Copy Application</button>
+        <button type="button" class="action download" id="downloadTxtDirectBtn" data-i18n="saveTxtBtn">Download .TXT</button>
+        <button type="button" class="action share" id="copyTxtDirectBtn" data-i18n="copyTxtBtn">Copy Application</button>
       </div>
     </div>
   </div>
@@ -882,20 +1487,23 @@ align-items: center;
 
 <div class="toast" id="toastMsg" role="status" aria-live="polite"></div>
 
+<!-- 16. Footer & Independent-Tool Disclaimer -->
 <footer class="wrap footer" data-i18n="footerText">
   MeterHisab • Consumer Recharge Expense Estimator • Independent tool, not affiliated with APDCL or any electricity board
 </footer>
 
 <script>
+const STORAGE_KEY = "meterhisab_v2_history";
+
 const translations = {
   en: {
-    topBadge: "Prepaid Recharge Tracker",
+        topBadge: "Prepaid Recharge Tracker",
     eyebrow: "SMART METER RECHARGE EXPENSE CHECKER",
     headline: "Recharge balance reducing quickly? Check your daily recharge expense in 1 minute.",
     subheadline: "Calculate your average daily and 30-day prepaid recharge deduction rate before visiting the electricity office.",
     trust: "100% Free • No Login • Works Offline on Phone",
-    formTitle: "🔎 Enter your recharge details",
-    boardLabel: "⚡ 1. Select your state / electricity board",
+    formTitle: "Enter your recharge details",
+    boardLabel: "1. Select your state / electricity board",
     board_APDCL: "Assam (APDCL)",
     board_SBPDCL: "Bihar (SBPDCL)",
     board_NBPDCL: "Bihar (NBPDCL)",
@@ -905,31 +1513,49 @@ const translations = {
     board_MPPKVVCL: "Madhya Pradesh (DISCOMs)",
     board_OTHER: "Other State / Electricity Board",
     boardHint: "Calculates your prepaid recharge deduction speed, not official kWh tariff billing.",
-    amountLabel: "💰 2. How much did you recharge? (₹)",
-    daysLabel: "📅 3. How many days did this recharge last?",
-    applianceLabel: "🏠 4. Do you use an AC or a large water motor? (Optional)",
+    amountLabel: "2. How much did you recharge? (₹)",
+    daysLabel: "3. How many days did this recharge last?",
+    applianceLabel: "4. Do you use an AC or a large water motor? (Optional)",
     no: "No, only fans / lights / TV",
     yes: "Yes, AC or large motor",
     applianceHint: "Used for load guidance below. Does not alter your measured recharge math.",
-    check: "🔍 Check My Meter Hisab",
+    check: "Check My Meter Hisab",
     error: "Please enter a valid recharge amount (₹1 to ₹1,00,000) and whole days (1 to 365).",
     badgeEstimate: "ESTIMATE ONLY • NOT AN OFFICIAL BILL",
-    statMonthly: "📅 30-Day Recharge Projection",
-    statDays: "⌛ Recharge Duration",
-    breakTitle: "🧾 Prepaid Recharge Math Breakdown",
+    kpiDaily: "Average Daily Deduction",
+    statMonthly: "30-Day Recharge Projection",
+    statDays: "Recharge Duration",
+    bandScaleTitle: "Internal Daily Estimate Band (Not an Official Board Classification)",
+    bandLow: "Low (< ₹25/d)",
+    bandMod: "Moderate (₹25–₹60/d)",
+    bandHigh: "High (> ₹60/d)",
+    chartTitle: "30-Day Cumulative Recharge Projection",
+    chartBadge: "Mathematical Projection • Not an Actual Bill",
+    day1Label: "Day 1",
+    day7Label: "Day 7",
+    day15Label: "Day 15",
+    day30Label: "Day 30",
+    insightsTitle: "Smart Recharge Expense Insights",
+    insightDailyTpl: "Your ₹{amount} recharge over {days} {daysWord} equals an average wallet deduction of {daily}.",
+    insightMonthlyTpl: "At this same deduction pace, 30 days of prepaid balance usage projects to {monthly} (about {rechargesPerMonth} recharges of ₹{amount} per month).",
+    insightBandLow: "This falls in MeterHisab's Low internal estimate band (under ₹25/day). These bands are for personal budgeting only, not official electricity board slabs.",
+    insightBandMod: "This falls in MeterHisab's Moderate internal estimate band (₹25 to ₹60/day). These bands are for personal budgeting only, not official electricity board slabs.",
+    insightBandHigh: "This falls in MeterHisab's High internal estimate band (above ₹60/day). High wallet deductions do not prove a meter defect—check if fixed charges or arrears were deducted.",
+    insightActionTpl: "Practical Next Step: Open your {board} consumer app or prepaid ledger to compare daily kWh units consumed against fixed demand charges and government duty.",
+    breakTitle: "Prepaid Recharge Math Breakdown",
     boardRow: "Electricity Board",
     rechargeAmount: "Recharge Amount Paid",
     dailyRate: "Average Recharge Deducted / Day",
     monthlyProjection: "Estimated 30-Day Recharge Spend",
-    applianceTitle: "💡 Household Load Context",
-    warningTitle: "⚠️ Why Prepaid Balance ≠ Actual Electricity Consumed",
+    applianceTitle: "Household Load Context",
+    warningTitle: "Why Prepaid Balance ≠ Actual Electricity Consumed",
     warnPoint1: "Prepaid wallet deductions often include daily fixed demand charges, electricity duty, arrear installments, or slab adjustments alongside unit (kWh) charges.",
     warnPoint2: "A fast recharge deduction speed alone never proves a smart meter is faulty.",
     warnPoint3: "We do not apply guessed tariff rates. Always check your official utility app (e.g., MyAPDCL) and kWh meter reading before filing a dispute.",
-    statusBtn: "📲 WhatsApp Status Image",
-    shareBtn: "👨‍👩‍👧 Share on WhatsApp",
-    letterBtn: "📄 Download Ledger Verification Request",
-    againBtn: "↻ Edit Recharge Details",
+    statusBtn: "WhatsApp Status Image",
+    shareBtn: "Share on WhatsApp",
+    letterBtn: "Download Ledger Verification Request",
+    againBtn: "Edit Recharge Details",
     safeTitle: "Lower Daily Recharge Deduction Rate",
     safeText: "Your average daily balance deduction is relatively low. Remember this tracks wallet deduction speed, not an official meter accuracy test.",
     warnTitle: "Moderate Daily Recharge Deduction Rate",
@@ -941,6 +1567,36 @@ const translations = {
     daysUnit: "days",
     dayUnitSingle: "day",
     perDaySuffix: "/ day",
+    historyTitle: "Recent Calculation History",
+    historySub: "Stored privately in your browser only (maximum 10 entries). Never sent to any server.",
+    clearAllBtn: "Clear All",
+    clearConfirmText: "Delete all saved calculations from this browser?",
+    confirmYes: "Yes, Delete All",
+    confirmNo: "Cancel",
+    historyEmpty: "No saved calculations yet. Run a calculation above to save it here automatically.",
+    reopenBtn: "Reopen",
+    setABtn: "Use as A",
+    setBBtn: "Use as B",
+    deleteBtn: "Delete",
+    compareTitle: "Compare Two Recharge Calculations",
+    compareSub: "Compare two different recharges side by side using manual inputs or saved history entries.",
+    compareHeaderA: "Calculation A (First Recharge)",
+    compareHeaderB: "Calculation B (Second Recharge)",
+    loadFromHistory: "Load from saved history (optional)",
+    manualEntryOpt: "-- Manual Entry --",
+    amountLabelShort: "Recharge Amount A (₹)",
+    daysLabelShort: "Duration A (Days)",
+    amountLabelShortB: "Recharge Amount B (₹)",
+    daysLabelShortB: "Duration B (Days)",
+    runCompareBtn: "Compare Recharge Calculations",
+    compColMetric: "Metric",
+    compColA: "Recharge A",
+    compColB: "Recharge B",
+    compColDiff: "Difference",
+    compHigherA: "Calculation A has a higher daily deduction (+{diff})",
+    compHigherB: "Calculation B has a higher daily deduction (+{diff})",
+    compEqual: "Both calculations have the exact same daily deduction rate",
+    compareDisclaimer: "Note: A higher daily recharge deduction reflects faster prepaid balance depletion (which may include fixed charges or arrear adjustments) and is not proof of higher kWh electricity consumption.",
     statusHeader: "PREPAID RECHARGE DEDUCTION ESTIMATE",
     statusSub: "Average Daily Balance Used",
     statusRechargeLine: "Recharge Paid",
@@ -951,14 +1607,15 @@ const translations = {
     statusDisclaimer2: "Balance deductions may include fixed charges or arrears, and do not prove a meter fault.",
     imageModalTitle: "WhatsApp Status Card",
     imageModalHint: "Tip: If download does not start on your phone browser, long-press the image above to save or share it.",
-    saveImageBtn: "⬇ Save Image",
-    shareImageBtn: "📤 Share Image",
+    saveImageBtn: "Save Image",
+    shareImageBtn: "Share Image",
     letterModalTitle: "Prepaid Ledger Verification Application",
     letterModalHint: "You can download this verification application as a text file or copy it directly to paste in WhatsApp/Email.",
-    saveTxtBtn: "⬇ Download .TXT",
-    copyTxtBtn: "📋 Copy Application",
+    saveTxtBtn: "Download .TXT",
+    copyTxtBtn: "Copy Application",
     copiedToast: "Copied to clipboard!",
     downloadedToast: "Download started!",
+    loadedToast: "Loaded calculation!",
     shareTextTemplate: "⚡ MeterHisab Check ({board}): My ₹{amount} smart meter recharge lasted {days} {daysWord} — an average recharge deduction of {daily} ({monthly} for 30 days). Note: This is a recharge expense estimate, not an official kWh bill or proof of meter fault.",
     letterTitle: "APPLICATION FOR PREPAID SMART METER LEDGER & DEDUCTION STATEMENT",
     letterBody: "To,\nThe Sub-Divisional Engineer / Assistant General Manager,\n{board}\n[Enter Sub-Division / Electricity Office Name]\n\nSubject: Request for detailed statement of prepaid smart meter balance deductions and kWh consumption\n\nRespected Sir/Madam,\n\nI am a registered electricity consumer under your office. My consumer details are as follows:\n- Consumer Name: [Enter Full Name]\n- Consumer / Account Number: [Enter Consumer Number]\n- Smart Meter Serial Number: [Enter Meter Number]\n- Address: [Enter Full Address]\n- Registered Mobile Number: [Enter Mobile Number]\n\nI would like to understand the breakdown of my recent prepaid recharge deductions. Based on my personal recharge log (for reference only):\n- Utility / Electricity Board: {board}\n- Recharge Amount Paid: {amount}\n- Duration Recharge Lasted: {days} {daysWord}\n- Calculated Average Daily Deduction: {daily}\n- Projected 30-Day Recharge Deduction: {monthly}\n\nI understand that prepaid balance deductions may include energy (kWh) charges, daily fixed demand charges, government electricity duty, or past arrear adjustments, and that recharge speed alone does not confirm a meter defect.\n\nTherefore, I kindly request your office to provide:\n1. A complete itemized prepaid ledger statement showing daily kWh units consumed, tariff slab applied, fixed charges, and any arrear deductions.\n2. Verification of whether my smart meter readings and prepaid wallet deductions are properly synchronized.\n\nThanking you,\n\nYours faithfully,\n[Signature]\n[Name]\nDate: {date}\n\nEnclosures: Copy of recent recharge receipt and consumer ID.",
@@ -970,8 +1627,8 @@ const translations = {
     headline: "रिचार्ज बैलेंस जल्दी घट रहा है? 1 मिनट में रोज़ का रिचार्ज खर्च जानें।",
     subheadline: "बिजली ऑफिस जाने से पहले अपने प्रीपेड रिचार्ज के रोज़ाना और 30-दिन के औसत बैलेंस खर्च का हिसाब लगाएं।",
     trust: "100% मुफ्त • लॉगिन नहीं • फोन पर तुरंत काम करे",
-    formTitle: "🔎 अपने रिचार्ज की जानकारी भरें",
-    boardLabel: "⚡ 1. अपना राज्य / बिजली बोर्ड चुनें",
+    formTitle: "अपने रिचार्ज की जानकारी भरें",
+    boardLabel: "1. अपना राज्य / बिजली बोर्ड चुनें",
     board_APDCL: "असम (APDCL)",
     board_SBPDCL: "बिहार (SBPDCL)",
     board_NBPDCL: "बिहार (NBPDCL)",
@@ -981,31 +1638,49 @@ const translations = {
     board_MPPKVVCL: "मध्य प्रदेश (DISCOMs)",
     board_OTHER: "अन्य राज्य / बिजली बोर्ड",
     boardHint: "यह आपके प्रीपेड रिचार्ज घटने की गति बताता है, आधिकारिक यूनिट (kWh) टैरिफ बिल नहीं।",
-    amountLabel: "💰 2. आपने कितने रुपये का रिचार्ज किया? (₹)",
-    daysLabel: "📅 3. यह रिचार्ज कितने दिन चला?",
-    applianceLabel: "🏠 4. क्या घर में AC या बड़ी पानी की मोटर चलती है? (वैकल्पिक)",
+    amountLabel: "2. आपने कितने रुपये का रिचार्ज किया? (₹)",
+    daysLabel: "3. यह रिचार्ज कितने दिन चला?",
+    applianceLabel: "4. क्या घर में AC या बड़ी पानी की मोटर चलती है? (वैकल्पिक)",
     no: "नहीं, सिर्फ पंखा / लाइट / टीवी",
     yes: "हाँ, AC या बड़ी मोटर है",
     applianceHint: "यह केवल नीचे दिए गए लोड उदाहरण के लिए है। इससे आपके रिचार्ज के गणित में कोई बदलाव नहीं होता।",
-    check: "🔍 मेरा मीटर हिसाब देखें",
+    check: "मेरा मीटर हिसाब देखें",
     error: "कृपया सही रिचार्ज राशि (₹1 से ₹1,00,000) और पूरे दिनों की संख्या (1 से 365) भरें।",
     badgeEstimate: "केवल अनुमान • आधिकारिक बिजली बिल नहीं",
-    statMonthly: "📅 30 दिन का रिचार्ज अनुमान",
-    statDays: "⌛ रिचार्ज चला",
-    breakTitle: "🧾 प्रीपेड रिचार्ज गणित का विवरण",
+    kpiDaily: "रोज़ाना औसत कटौती",
+    statMonthly: "30 दिन का रिचार्ज अनुमान",
+    statDays: "रिचार्ज अवधि",
+    bandScaleTitle: "आंतरिक दैनिक अनुमान श्रेणी (आधिकारिक बिजली बोर्ड वर्गीकरण नहीं)",
+    bandLow: "कम (< ₹25/दिन)",
+    bandMod: "मध्यम (₹25–₹60/दिन)",
+    bandHigh: "अधिक (> ₹60/दिन)",
+    chartTitle: "30-दिन का संचयी रिचार्ज अनुमान",
+    chartBadge: "गणितीय अनुमान • वास्तविक बिजली बिल नहीं",
+    day1Label: "दिन 1",
+    day7Label: "दिन 7",
+    day15Label: "दिन 15",
+    day30Label: "दिन 30",
+    insightsTitle: "स्मार्ट रिचार्ज खर्च विश्लेषण",
+    insightDailyTpl: "₹{amount} का रिचार्ज {days} {daysWord} चलने पर आपकी औसत दैनिक वॉलेट कटौती {daily} है।",
+    insightMonthlyTpl: "इसी गति से 30 दिनों का अनुमानित प्रीपेड रिचार्ज खर्च {monthly} होगा (महीने में ₹{amount} के लगभग {rechargesPerMonth} रिचार्ज)।",
+    insightBandLow: "यह MeterHisab के 'कम' आंतरिक अनुमान बैंड (₹25/दिन से कम) में आता है। यह केवल व्यक्तिगत बजट के लिए है, बिजली बोर्ड का आधिकारिक स्लैब नहीं।",
+    insightBandMod: "यह MeterHisab के 'मध्यम' आंतरिक अनुमान बैंड (₹25 से ₹60/दिन) में आता है। यह केवल व्यक्तिगत बजट के लिए है, बिजली बोर्ड का आधिकारिक स्लैब नहीं।",
+    insightBandHigh: "यह MeterHisab के 'अधिक' आंतरिक अनुमान बैंड (₹60/दिन से ऊपर) में आता है। तेज़ कटौती मीटर खराब होने का प्रमाण नहीं है—जांचें कि फिक्स्ड चार्ज या बकाया तो नहीं कटा।",
+    insightActionTpl: "सुझाव: अपने {board} ऐप या प्रीपेड लेजर में रोज़ाना की खपत यूनिट (kWh), फिक्स्ड डिमांड चार्ज और सरकारी ड्यूटी की जांच करें।",
+    breakTitle: "प्रीपेड रिचार्ज गणित का विवरण",
     boardRow: "बिजली बोर्ड",
     rechargeAmount: "रिचार्ज राशि",
     dailyRate: "रोज़ाना औसत बैलेंस कटौती",
     monthlyProjection: "30 दिन का अनुमानित रिचार्ज खर्च",
-    applianceTitle: "💡 घरेलू बिजली लोड की जानकारी",
-    warningTitle: "⚠️ प्रीपेड बैलेंस कटौती = वास्तविक बिजली खपत क्यों नहीं है?",
+    applianceTitle: "घरेलू बिजली लोड की जानकारी",
+    warningTitle: "प्रीपेड बैलेंस कटौती = वास्तविक बिजली खपत क्यों नहीं है?",
     warnPoint1: "प्रीपेड बैलेंस से यूनिट (kWh) खर्च के अलावा रोज़ाना फिक्स्ड चार्ज, इलेक्ट्रिसिटी ड्यूटी, या पुराने बकाये की किस्त भी कट सकती है।",
     warnPoint2: "केवल रिचार्ज जल्दी खत्म होने से यह साबित नहीं होता कि स्मार्ट मीटर खराब है।",
     warnPoint3: "हम कोई मनगढ़ंत टैरिफ रेट नहीं लगाते। शिकायत करने से पहले अपने बोर्ड के आधिकारिक ऐप (जैसे MyAPDCL) और मीटर की kWh रीडिंग ज़रूर जांचें।",
-    statusBtn: "📲 WhatsApp स्टेटस इमेज",
-    shareBtn: "👨‍👩‍👧 WhatsApp पर शेयर करें",
-    letterBtn: "📄 लेजर जांच आवेदन डाउनलोड करें",
-    againBtn: "↻ रिचार्ज जानकारी बदलें",
+    statusBtn: "WhatsApp स्टेटस इमेज",
+    shareBtn: "WhatsApp पर शेयर करें",
+    letterBtn: "लेजर जांच आवेदन डाउनलोड करें",
+    againBtn: "रिचार्ज जानकारी बदलें",
     safeTitle: "रोज़ाना रिचार्ज कटौती की दर कम है",
     safeText: "आपकी औसत दैनिक बैलेंस कटौती कम दिख रही है। ध्यान रहे यह केवल रिचार्ज खर्च की दर है, मीटर की तकनीकी जांच नहीं।",
     warnTitle: "रोज़ाना रिचार्ज कटौती मध्यम स्तर पर है",
@@ -1017,6 +1692,36 @@ const translations = {
     daysUnit: "दिन",
     dayUnitSingle: "दिन",
     perDaySuffix: "/ दिन",
+    historyTitle: "हाल के रिचार्ज हिसाब का इतिहास",
+    historySub: "यह इतिहास केवल आपके ब्राउज़र में सुरक्षित रहता है (अधिकतम 10 रिकॉर्ड)। किसी सर्वर पर नहीं भेजा जाता।",
+    clearAllBtn: "सभी हटाएं",
+    clearConfirmText: "क्या आप ब्राउज़र में सहेजे गए सभी हिसाब हटाना चाहते हैं?",
+    confirmYes: "हाँ, सभी हटाएं",
+    confirmNo: "रद्द करें",
+    historyEmpty: "अभी कोई हिसाब सेव नहीं है। ऊपर रिचार्ज का हिसाब लगाएं, वह यहाँ अपने आप जुड़ जाएगा।",
+    reopenBtn: "खोलें",
+    setABtn: "A में चुनें",
+    setBBtn: "B में चुनें",
+    deleteBtn: "हटाएं",
+    compareTitle: "दो रिचार्ज हिसाब की तुलना करें",
+    compareSub: "दो अलग-अलग रिचार्ज की दैनिक कटौती और 30-दिन के अनुमान की आपस में तुलना करें।",
+    compareHeaderA: "हिसाब A (पहला रिचार्ज)",
+    compareHeaderB: "हिसाब B (दूसरा रिचार्ज)",
+    loadFromHistory: "पुराने इतिहास से चुनें (वैकल्पिक)",
+    manualEntryOpt: "-- खुद नंबर भरें --",
+    amountLabelShort: "रिचार्ज राशि A (₹)",
+    daysLabelShort: "अवधि A (दिन)",
+    amountLabelShortB: "रिचार्ज राशि B (₹)",
+    daysLabelShortB: "अवधि B (दिन)",
+    runCompareBtn: "दोनों रिचार्ज की तुलना करें",
+    compColMetric: "विवरण",
+    compColA: "रिचार्ज A",
+    compColB: "रिचार्ज B",
+    compColDiff: "अंतर",
+    compHigherA: "हिसाब A में रोज़ाना कटौती अधिक है (+{diff})",
+    compHigherB: "हिसाब B में रोज़ाना कटौती अधिक है (+{diff})",
+    compEqual: "दोनों रिचार्ज में रोज़ाना कटौती की दर बराबर है",
+    compareDisclaimer: "नोट: अधिक दैनिक रिचार्ज कटौती का अर्थ केवल बैलेंस तेज़ी से घटना है (जिसमें फिक्स्ड चार्ज या बकाया शामिल हो सकता है); यह अधिक बिजली (kWh) खपत का प्रमाण नहीं है।",
     statusHeader: "प्रीपेड रिचार्ज खर्च अनुमान",
     statusSub: "रोज़ाना औसत बैलेंस कटौती",
     statusRechargeLine: "रिचार्ज राशि",
@@ -1027,14 +1732,15 @@ const translations = {
     statusDisclaimer2: "बैलेंस कटौती में फिक्स्ड चार्ज या बकाया शामिल हो सकता है; यह मीटर खराबी का प्रमाण नहीं है।",
     imageModalTitle: "WhatsApp स्टेटस कार्ड",
     imageModalHint: "सुझाव: यदि आपके फोन ब्राउज़र में डाउनलोड शुरू न हो, तो ऊपर दी गई इमेज को दबाए रखें (Long-press) और सेव/शेयर करें।",
-    saveImageBtn: "⬇ इमेज सेव करें",
-    shareImageBtn: "📤 इमेज शेयर करें",
+    saveImageBtn: "इमेज सेव करें",
+    shareImageBtn: "इमेज शेयर करें",
     letterModalTitle: "प्रीपेड लेजर जांच आवेदन-पत्र",
     letterModalHint: "आप इस आवेदन को .TXT फाइल के रूप में डाउनलोड कर सकते हैं या सीधे कॉपी करके WhatsApp/Email में पेस्ट कर सकते हैं।",
-    saveTxtBtn: "⬇ .TXT डाउनलोड करें",
-    copyTxtBtn: "📋 आवेदन कॉपी करें",
+    saveTxtBtn: ".TXT डाउनलोड करें",
+    copyTxtBtn: "आवेदन कॉपी करें",
     copiedToast: "आवेदन कॉपी हो गया!",
     downloadedToast: "डाउनलोड शुरू हो गया!",
+    loadedToast: "हिसाब लोड हो गया!",
     shareTextTemplate: "⚡ MeterHisab जांच ({board}): मेरा ₹{amount} का स्मार्ट मीटर रिचार्ज {days} {daysWord} चला — यानी रोज़ाना औसत {daily} ({monthly} प्रति 30 दिन) की बैलेंस कटौती। नोट: यह रिचार्ज खर्च का अनुमान है, आधिकारिक बिल या मीटर खराबी का प्रमाण नहीं।",
     letterTitle: "प्रीपेड स्मार्ट मीटर लेजर और बैलेंस कटौती विवरण हेतु आवेदन",
     letterBody: "सेवा में,\nउप-मंडल अभियंता / सहायक महाप्रबंधक,\n{board}\n[बिजली उपखंड / कार्यालय का नाम लिखें]\n\nविषय: प्रीपेड स्मार्ट मीटर की बैलेंस कटौती और यूनिट (kWh) खपत का विस्तृत लेजर उपलब्ध कराने के संबंध में\n\nमहोदय / महोदया,\n\nमैं आपके कार्यालय के अंतर्गत एक पंजीकृत बिजली उपभोक्ता हूँ। मेरा विवरण निम्न प्रकार है:\n- उपभोक्ता का नाम: [अपना पूरा नाम लिखें]\n- उपभोक्ता / खाता संख्या: [उपभोक्ता नंबर लिखें]\n- स्मार्ट मीटर सीरियल नंबर: [मीटर नंबर लिखें]\n- पता: [पूरा पता लिखें]\n- पंजीकृत मोबाइल नंबर: [मोबाइल नंबर लिखें]\n\nमैं अपने हाल के प्रीपेड रिचार्ज कटौती का विवरण समझना चाहता/चाहती हूँ। मेरे रिचार्ज रिकॉर्ड के अनुसार (केवल संदर्भ हेतु):\n- बिजली बोर्ड: {board}\n- रिचार्ज की गई राशि: {amount}\n- रिचार्ज चलने की अवधि: {days} {daysWord}\n- औसत दैनिक बैलेंस कटौती: {daily}\n- 30 दिनों का अनुमानित रिचार्ज खर्च: {monthly}\n\nमुझे ज्ञात है कि प्रीपेड बैलेंस कटौती में बिजली खपत (kWh) के साथ दैनिक फिक्स्ड चार्ज, इलेक्ट्रिसिटी ड्यूटी या पुराने बकाये की किस्त शामिल हो सकती है, और केवल रिचार्ज घटने की गति से मीटर खराब होना सिद्ध नहीं होता।\n\nअतः आपसे विनम्र अनुरोध है कि:\n1. मेरे प्रीपेड खाते का विस्तृत लेजर स्टेटमेंट (दैनिक खपत यूनिट kWh, लागू टैरिफ स्लैब, फिक्स्ड चार्ज और बकाया कटौती सहित) प्रदान करें।\n2. यह सत्यापित करें कि मेरे स्मार्ट मीटर की रीडिंग और प्रीपेड वॉलेट कटौती सही ढंग से सिंक हो रही हैं।\n\nसधन्यवाद,\n\nभवदीय,\n[हस्ताक्षर]\n[नाम]\nदिनांक: {date}\n\nसंलग्नक: हाल के रिचार्ज की रसीद और उपभोक्ता आईडी की प्रति।",
@@ -1046,8 +1752,8 @@ const translations = {
     headline: "ৰিচাৰ্জ বেলেঞ্চ সোনকালে শেষ হৈছে নেকি? ১ মিনিটতে দৈনিক ৰিচাৰ্জ খৰচ জানক।",
     subheadline: "বিদ্যুৎ কাৰ্যালয়লৈ যোৱাৰ আগতে আপোনাৰ প্ৰিপেইড ৰিচাৰ্জৰ দৈনিক আৰু ৩০ দিনৰ গড় বেলেঞ্চ কৰ্তনৰ হিচাপ চাওক।",
     trust: "১০০% বিনামূলীয়া • লগইন নালাগে • ফোনত সহজে চলে",
-    formTitle: "🔎 আপোনাৰ ৰিচাৰ্জৰ তথ্য দিয়ক",
-    boardLabel: "⚡ ১. আপোনাৰ ৰাজ্য / বিদ্যুৎ ব’ৰ্ড বাছনি কৰক",
+    formTitle: "আপোনাৰ ৰিচাৰ্জৰ তথ্য দিয়ক",
+    boardLabel: "১. আপোনাৰ ৰাজ্য / বিদ্যুৎ ব’ৰ্ড বাছনি কৰক",
     board_APDCL: "অসম (APDCL)",
     board_SBPDCL: "বিহাৰ (SBPDCL)",
     board_NBPDCL: "বিহাৰ (NBPDCL)",
@@ -1057,31 +1763,49 @@ const translations = {
     board_MPPKVVCL: "মধ্য প্ৰদেশ (DISCOMs)",
     board_OTHER: "অন্য ৰাজ্য / বিদ্যুৎ ব’ৰ্ড",
     boardHint: "ই আপোনাৰ প্ৰিপেইড ৰিচাৰ্জ শেষ হোৱাৰ গড় গতি গণনা কৰে, চৰকাৰী ইউনিট (kWh) টেৰিফ বিল নহয়।",
-    amountLabel: "💰 ২. আপুনি কিমান টকাৰ ৰিচাৰ্জ কৰিছিল? (₹)",
-    daysLabel: "📅 ৩. এই ৰিচাৰ্জ কিমান দিন চলিল?",
-    applianceLabel: "🏠 ৪. ঘৰত AC বা ডাঙৰ পানীৰ মটৰ চলেনে? (ঐচ্ছিক)",
+    amountLabel: "২. আপুনি কিমান টকাৰ ৰিচাৰ্জ কৰিছিল? (₹)",
+    daysLabel: "৩. এই ৰিচাৰ্জ কিমান দিন চলিল?",
+    applianceLabel: "৪. ঘৰত AC বা ডাঙৰ পানীৰ মটৰ চলেনে? (ঐচ্ছিক)",
     no: "নাই, কেৱল ফেন / লাইট / টিভি",
     yes: "হয়, AC বা ডাঙৰ মটৰ আছে",
-applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ বাবে। ই আপোনাৰ ৰিচাৰ্জৰ গণিত সলনি নকৰে।",
-    check: "🔍 মোৰ মিটাৰ হিচাপ চাওক",
+    applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ বাবে। ই আপোনাৰ ৰিচাৰ্জৰ গণিত সলনি নকৰে।",
+    check: "মোৰ মিটাৰ হিচাপ চাওক",
     error: "অনুগ্ৰহ কৰি সঠিক ৰিচাৰ্জৰ ধন (₹1 ৰ পৰা ₹1,00,000) আৰু সম্পূৰ্ণ দিনৰ সংখ্যা (1 ৰ পৰা 365) দিয়ক।",
     badgeEstimate: "কেৱল অনুমান • চৰকাৰী বিদ্যুৎ বিল নহয়",
-    statMonthly: "📅 ৩০ দিনৰ ৰিচাৰ্জ অনুমান",
-    statDays: "⌛ ৰিচাৰ্জ চলিল",
-    breakTitle: "🧾 প্ৰিপেইড ৰিচাৰ্জ গণিতৰ বিৱৰণ",
+    kpiDaily: "দৈনিক গড় কৰ্তন",
+    statMonthly: "৩০ দিনৰ ৰিচাৰ্জ অনুমান",
+    statDays: "ৰিচাৰ্জৰ সময়কাল",
+    bandScaleTitle: "আভ্যন্তৰীণ দৈনিক অনুমান শ্ৰেণী (চৰকাৰী ব’ৰ্ডৰ শ্ৰেণীবিভাজন নহয়)",
+    bandLow: "কম (< ₹25/দিন)",
+    bandMod: "মধ্যমীয়া (₹25–₹60/দিন)",
+    bandHigh: "বেছি (> ₹60/দিন)",
+    chartTitle: "৩০ দিনৰ সঞ্চয়ী ৰিচাৰ্জ অনুমান",
+    chartBadge: "গাণিতিক অনুমান • প্ৰকৃত বিল নহয়",
+    day1Label: "দিন ১",
+    day7Label: "দিন ৭",
+    day15Label: "দিন ১৫",
+    day30Label: "দিন ৩০",
+    insightsTitle: "স্মাৰ্ট ৰিচাৰ্জ খৰচ বিশ্লেষণ",
+    insightDailyTpl: "আপোনাৰ ₹{amount} টকাৰ ৰিচাৰ্জ {days} {daysWord} চলাৰ ফলত দৈনিক গড় ৱালেট কৰ্তন হৈছে {daily}।",
+    insightMonthlyTpl: "এই একে গতিত ৩০ দিনত আনুমানিক প্ৰিপেইড ৰিচাৰ্জ খৰচ হ’ব {monthly} (মাহত ₹{amount} টকাৰ প্ৰায় {rechargesPerMonth} বাৰ ৰিচাৰ্জ)।",
+    insightBandLow: "ই MeterHisab ৰ 'কম' আভ্যন্তৰীণ অনুমান শ্ৰেণীত (₹25/দিনৰ তলত) পৰে। এই শ্ৰেণী কেৱল ব্যক্তিগত বাজেটৰ বাবেহে, বিদ্যুৎ ব’ৰ্ডৰ চৰকাৰী স্লেব নহয়।",
+    insightBandMod: "ই MeterHisab ৰ 'মধ্যমীয়া' আভ্যন্তৰীণ অনুমান শ্ৰেণীত (₹25 ৰ পৰা ₹60/দিন) পৰে। এই শ্ৰেণী কেৱল ব্যক্তিগত বাজেটৰ বাবেহে, বিদ্যুৎ ব’ৰ্ডৰ চৰকাৰী স্লেব নহয়।",
+    insightBandHigh: "ই MeterHisab ৰ 'বেছি' আভ্যন্তৰীণ অনুমান শ্ৰেণীত (₹60/দিনৰ ওপৰত) পৰে। বেছি কৰ্তনে মিটাৰ বেয়া হোৱাটো প্ৰমাণ নকৰে—ফিক্সড চাৰ্জ বা বকেয়া কটা হৈছে নেকি চাওক।",
+    insightActionTpl: "পৰামৰ্শ: আপোনাৰ {board} এপ বা প্ৰিপেইড লেজাৰত দৈনিক খৰচ হোৱা ইউনিট (kWh), ফিক্সড ডিমাণ্ড চাৰ্জ আৰু চৰকাৰী মাচুল মিলাই চাওক।",
+    breakTitle: "প্ৰিপেইড ৰিচাৰ্জ গণিতৰ বিৱৰণ",
     boardRow: "বিদ্যুৎ ব’ৰ্ড",
     rechargeAmount: "ৰিচাৰ্জ কৰা ধন",
     dailyRate: "দৈনিক গড় বেলেঞ্চ কৰ্তন",
     monthlyProjection: "৩০ দিনৰ আনুমানিক ৰিচাৰ্জ খৰচ",
-    applianceTitle: "💡 ঘৰুৱা বিদ্যুৎ লোডৰ ধাৰণা",
-    warningTitle: "⚠️ প্ৰিপেইড বেলেঞ্চ কৰ্তন = প্ৰকৃত বিদ্যুৎ খৰচ কিয় নহয়?",
+    applianceTitle: "ঘৰুৱা বিদ্যুৎ লোডৰ ধাৰণা",
+    warningTitle: "প্ৰিপেইড বেলেঞ্চ কৰ্তন = প্ৰকৃত বিদ্যুৎ খৰচ কিয় নহয়?",
     warnPoint1: "প্ৰিপেইড বেলেঞ্চৰ পৰা ইউনিট (kWh) খৰচৰ উপৰিও দৈনিক ফিক্সড ডিমাণ্ড চাৰ্জ, ইলেকট্ৰিচিটি ডিউটি বা পুৰণি বকেয়াৰ কিস্তি কাটিব পাৰে।",
     warnPoint2: "কেৱল ৰিচাৰ্জ সোনকালে শেষ হোৱাৰ বাবেই স্মাৰ্ট মিটাৰ বেয়া বুলি প্ৰমাণ নহয়।",
     warnPoint3: "আমি কোনো অনুমানিক টেৰিফ ৰেট ব্যৱহাৰ নকৰোঁ। অভিযোগ দিয়াৰ আগতে চৰকাৰী এপ (যেনে MyAPDCL) আৰু মিটাৰৰ kWh ৰিডিং পৰীক্ষা কৰক।",
-    statusBtn: "📲 WhatsApp Status ছবি",
-    shareBtn: "👨‍👩‍👧 WhatsApp ত শ্বেয়াৰ কৰক",
-    letterBtn: "📄 লেজাৰ পৰীক্ষাৰ আবেদন ডাউনলোড কৰক",
-    againBtn: "↻ ৰিচাৰ্জৰ তথ্য সলনি কৰক",
+    statusBtn: "WhatsApp Status ছবি",
+    shareBtn: "WhatsApp ত শ্বেয়াৰ কৰক",
+    letterBtn: "লেজাৰ পৰীক্ষাৰ আবেদন ডাউনলোড কৰক",
+    againBtn: "ৰিচাৰ্জৰ তথ্য সলনি কৰক",
     safeTitle: "দৈনিক ৰিচাৰ্জ কৰ্তনৰ হাৰ কম",
     safeText: "আপোনাৰ দৈনিক গড় বেলেঞ্চ কৰ্তন তুলনামূলকভাৱে কম। মনত ৰাখিব এইটো কেৱল ৰিচাৰ্জ খৰচৰ গতি, মিটাৰৰ কাৰিকৰী পৰীক্ষা নহয়।",
     warnTitle: "দৈনিক ৰিচাৰ্জ কৰ্তন মধ্যমীয়া",
@@ -1093,6 +1817,36 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     daysUnit: "দিন",
     dayUnitSingle: "দিন",
     perDaySuffix: "/ দিন",
+    historyTitle: "শেহতীয়া হিচাপৰ তালিকা",
+    historySub: "এই তথ্য কেৱল আপোনাৰ ব্ৰাউজাৰত সংৰক্ষিত থাকে (সৰ্বাধিক ১০ টা)। কোনো ছাৰ্ভাৰলৈ পঠিওৱা নহয়।",
+    clearAllBtn: "সকলো মচক",
+    clearConfirmText: "আপুনি ব্ৰাউজাৰত থকা সকলো হিচাপ মচিব বিচাৰেনে?",
+    confirmYes: "হয়, সকলো মচক",
+    confirmNo: "বাতিল কৰক",
+    historyEmpty: "এতিয়ালৈকে কোনো হিচাপ সংৰক্ষিত হোৱা নাই। ওপৰত গণনা কৰিলে ইয়াত স্বয়ংক্ৰিয়ভাৱে জমা হ’ব।",
+    reopenBtn: "খোলক",
+    setABtn: "A ত লওক",
+    setBBtn: "B ত লওক",
+    deleteBtn: "মচক",
+    compareTitle: "দুটা ৰিচাৰ্জ হিচাপ তুলনা কৰক",
+    compareSub: "দুটা পৃথক ৰিচাৰ্জৰ দৈনিক কৰ্তন আৰু ৩০ দিনৰ অনুমানৰ তুলনা কৰক।",
+    compareHeaderA: "হিচাপ A (প্ৰথম ৰিচাৰ্জ)",
+    compareHeaderB: "হিচাপ B (দ্বিতীয় ৰিচাৰ্জ)",
+    loadFromHistory: "পুৰণি তালিকাৰ পৰা লওক (ঐচ্ছিক)",
+    manualEntryOpt: "-- নিজে নম্বৰ লিখক --",
+    amountLabelShort: "ৰিচাৰ্জৰ ধন A (₹)",
+    daysLabelShort: "দিনৰ সংখ্যা A",
+    amountLabelShortB: "ৰিচাৰ্জৰ ধন B (₹)",
+    daysLabelShortB: "দিনৰ সংখ্যা B",
+    runCompareBtn: "দুয়োটা ৰিচাৰ্জ তুলনা কৰক",
+    compColMetric: "বিৱৰণ",
+    compColA: "ৰিচাৰ্জ A",
+    compColB: "ৰিচাৰ্জ B",
+    compColDiff: "পাৰ্থক্য",
+    compHigherA: "হিচাপ A ত দৈনিক কৰ্তন বেছি (+{diff})",
+    compHigherB: "হিচাপ B ত দৈনিক কৰ্তন বেছি (+{diff})",
+    compEqual: "দুয়োটা হিচাপত দৈনিক কৰ্তনৰ হাৰ সমান",
+    compareDisclaimer: "টোকা: অধিক দৈনিক ৰিচাৰ্জ কৰ্তনে কেৱল বেলেঞ্চ সোনকালে শেষ হোৱাটো বুজায় (য’ত ফিক্সড চাৰ্জ বা বকেয়া থাকিব পাৰে); ই অধিক বিদ্যুৎ (kWh) খৰচৰ প্ৰমাণ নহয়।",
     statusHeader: "প্ৰিপেইড ৰিচাৰ্জ কৰ্তনৰ অনুমান",
     statusSub: "দৈনিক গড় বেলেঞ্চ খৰচ",
     statusRechargeLine: "ৰিচাৰ্জৰ ধন",
@@ -1103,14 +1857,15 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     statusDisclaimer2: "বেলেঞ্চ কৰ্তনত ফিক্সড চাৰ্জ বা বকেয়া থাকিব পাৰে; ই মিটাৰৰ ত্ৰুটি প্ৰমাণ নকৰে।",
     imageModalTitle: "WhatsApp Status কাৰ্ড",
     imageModalHint: "টিপ: যদি আপোনাৰ ফোন ব্ৰাউজাৰত ডাউনলোড আৰম্ভ নহয়, ওপৰৰ ছবিখনত দীঘলীয়াকৈ টিপি (Long-press) চেভ বা শ্বেয়াৰ কৰক।",
-    saveImageBtn: "⬇ ছবি চেভ কৰক",
-    shareImageBtn: "📤 ছবি শ্বেয়াৰ কৰক",
+    saveImageBtn: "ছবি চেভ কৰক",
+    shareImageBtn: "ছবি শ্বেয়াৰ কৰক",
     letterModalTitle: "প্ৰিপেইড লেজাৰ পৰীক্ষাৰ আবেদন",
     letterModalHint: "আপুনি এই আবেদনখন .TXT ফাইল হিচাপে ডাউনলোড কৰিব পাৰে বা কপি কৰি WhatsApp/Email ত ব্যৱহাৰ কৰিব পাৰে।",
-    saveTxtBtn: "⬇ .TXT ডাউনলোড কৰক",
-    copyTxtBtn: "📋 আবেদন কপি কৰক",
+    saveTxtBtn: ".TXT ডাউনলোড কৰক",
+    copyTxtBtn: "আবেদন কপি কৰক",
     copiedToast: "আবেদন কপি কৰা হ’ল!",
     downloadedToast: "ডাউনলোড আৰম্ভ হৈছে!",
+    loadedToast: "হিচাপ লোড কৰা হ’ল!",
     shareTextTemplate: "⚡ MeterHisab হিচাপ ({board}): মোৰ ₹{amount} টকাৰ স্মাৰ্ট মিটাৰ ৰিচাৰ্জ {days} {daysWord} চলিল — অৰ্থাৎ দৈনিক গড় {daily} ({monthly} প্ৰতি ৩০ দিন) বেলেঞ্চ কৰ্তন। টোকা: এইটো ৰিচাৰ্জ খৰচৰ অনুমানহে, চৰকাৰী বিল বা মিটাৰ বেয়া হোৱাৰ প্ৰমাণ নহয়।",
     letterTitle: "প্ৰিপেইড স্মাৰ্ট মিটাৰৰ লেজাৰ আৰু বেলেঞ্চ কৰ্তনৰ বিৱৰণ বিচাৰি আবেদন",
     letterBody: "প্ৰতি,\nউপ-সংমণ্ডল অভিযন্তা / সহকাৰী মহাপ্ৰবন্ধক,\n{board}\n[বিদ্যুৎ উপ-সংমণ্ডল / কাৰ্যালয়ৰ নাম লিখক]\n\nবিষয়: প্ৰিপেইড স্মাৰ্ট মিটাৰৰ বেলেঞ্চ কৰ্তন আৰু ইউনিট (kWh) খৰচৰ বিস্তৃত লেজাৰ বিৱৰণ বিচাৰি আবেদন\n\nমহোদয় / মহোদয়া,\n\nমই আপোনাৰ কাৰ্যালয়ৰ অধীনস্থ এজন পঞ্জীয়নভুক্ত বিদ্যুৎ গ্ৰাহক। মোৰ তথ্য তলত দিয়া হ’ল:\n- গ্ৰাহকৰ নাম: [সম্পূৰ্ণ নাম লিখক]\n- গ্ৰাহক / একাউণ্ট নম্বৰ: [গ্ৰাহক নম্বৰ লিখক]\n- স্মাৰ্ট মিটাৰ ক্ৰমিক নম্বৰ: [মিটাৰ নম্বৰ লিখক]\n- ঠিকনা: [সম্পূৰ্ণ ঠিকনা লিখক]\n- পঞ্জীয়নভুক্ত ম’বাইল নম্বৰ: [ম’বাইল নম্বৰ লিখক]\n\nমই মোৰ শেহতীয়া প্ৰিপেইড ৰিচাৰ্জ কৰ্তনৰ বিৱৰণ জানিব বিচাৰোঁ। মোৰ ব্যক্তিগত ৰিচাৰ্জ তথ্য অনুসৰি (কেৱল উল্লেখৰ বাবে):\n- বিদ্যুৎ ব’ৰ্ড: {board}\n- ৰিচাৰ্জ কৰা ধন: {amount}\n- ৰিচাৰ্জ চলা দিন: {days} {daysWord}\n- গণনা কৰা দৈনিক গড় কৰ্তন: {daily}\n- ৩০ দিনৰ আনুমানিক ৰিচাৰ্জ কৰ্তন: {monthly}\n\nমই অৱগত যে প্ৰিপেইড বেলেঞ্চ কৰ্তনত বিদ্যুৎ খৰচ (kWh)ৰ লগতে দৈনিক ফিক্সড ডিমাণ্ড চাৰ্জ, চৰকাৰী মাচুল বা পুৰণি বকেয়াৰ কিস্তি অন্তৰ্ভুক্ত থাকিব পাৰে, আৰু কেৱল ৰিচাৰ্জ শেষ হোৱাৰ গতিয়ে মিটাৰৰ ত্ৰুটি প্ৰমাণ নকৰে।\n\nসেয়েহে অনুগ্ৰহ কৰি মোক তলত দিয়া তথ্যসমূহ প্ৰদান কৰিবলৈ অনুৰোধ জনালোঁ:\n১. দৈনিক খৰচ হোৱা ইউনিট (kWh), প্ৰযোজ্য টেৰিফ স্লেব, ফিক্সড চাৰ্জ আৰু বকেয়া কৰ্তন দেখুওৱা এখন সম্পূৰ্ণ প্ৰিপেইড লেজাৰ বিবৃতি।\n২. মোৰ স্মাৰ্ট মিটাৰৰ ৰিডিং আৰু প্ৰিপেইড ৱালেটৰ কৰ্তন সঠিকভাৱে সংযোগ (Sync) হৈ আছে নে নাই তাৰ নিশ্চিতকৰণ।\n\nধন্যবাদেৰে,\n\nআপোনাৰ বিশ্বাসী,\n[স্বাক্ষৰ]\n[নাম]\nতাৰিখ: {date}\n\nসংলগ্ন: শেহতীয়া ৰিচাৰ্জ ৰচিদ আৰু গ্ৰাহক আইডিৰ প্ৰতিলিপি।",
@@ -1122,8 +1877,8 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     headline: "রিচার্জ ব্যালেন্স কি দ্রুত শেষ হচ্ছে? ১ মিনিটে দৈনিক রিচার্জ খরচ জানুন।",
     subheadline: "বিদ্যুৎ অফিসে যাওয়ার আগে আপনার প্রিপেইড রিচার্জের দৈনিক এবং ৩০ দিনের গড় ব্যালেন্স কাটার হিসাব করুন।",
     trust: "১০০% বিনামূল্যে • লগইন নেই • ফোনে সাথে সাথে কাজ করে",
-    formTitle: "🔎 আপনার রিচার্জের তথ্য দিন",
-    boardLabel: "⚡ ১. আপনার রাজ্য / বিদ্যুৎ বোর্ড বেছে নিন",
+    formTitle: "আপনার রিচার্জের তথ্য দিন",
+    boardLabel: "১. আপনার রাজ্য / বিদ্যুৎ বোর্ড বেছে নিন",
     board_APDCL: "আসাম (APDCL)",
     board_SBPDCL: "বিহার (SBPDCL)",
     board_NBPDCL: "বিহার (NBPDCL)",
@@ -1133,31 +1888,49 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     board_MPPKVVCL: "মধ্যপ্রদেশ (DISCOMs)",
     board_OTHER: "অন্যান্য রাজ্য / বিদ্যুৎ বোর্ড",
     boardHint: "এটি আপনার প্রিপেইড রিচার্জ শেষ হওয়ার গড় গতি হিসাব করে, সরকারি ইউনিট (kWh) ট্যারিফ বিল নয়।",
-    amountLabel: "💰 ২. কত টাকার রিচার্জ করেছিলেন? (₹)",
-    daysLabel: "📅 ৩. এই রিচার্জ কত দিন চলেছিল?",
-    applianceLabel: "🏠 ৪. বাড়িতে কি AC বা বড় জলের মোটর চলে? (ঐচ্ছিক)",
+    amountLabel: "২. কত টাকার রিচার্জ করেছিলেন? (₹)",
+    daysLabel: "৩. এই রিচার্জ কত দিন চলেছিল?",
+    applianceLabel: "৪. বাড়িতে কি AC বা বড় জলের মোটর চলে? (ঐচ্ছিক)",
     no: "না, শুধু ফ্যান / লাইট / টিভি",
     yes: "হ্যাঁ, AC বা বড় মোটর আছে",
     applianceHint: "এটি কেবল নিচের লোড উদাহরণের জন্য। এতে আপনার রিচার্জের অঙ্কে কোনো পরিবর্তন হয় না।",
-    check: "🔍 আমার মিটার হিসাব দেখুন",
+    check: "আমার মিটার হিসাব দেখুন",
     error: "অনুগ্রহ করে সঠিক রিচার্জের টাকা (₹1 থেকে ₹1,00,000) এবং পূর্ণ দিনের সংখ্যা (1 থেকে 365) লিখুন।",
     badgeEstimate: "শুধু অনুমান • সরকারি বিদ্যুৎ বিল নয়",
-    statMonthly: "📅 ৩০ দিনের রিচার্জ অনুমান",
-    statDays: "⌛ রিচার্জ চলেছিল",
-    breakTitle: "🧾 প্রিপেইড রিচার্জ হিসাবের বিবরণ",
+    kpiDaily: "দৈনিক গড় কর্তন",
+    statMonthly: "৩০ দিনের রিচার্জ অনুমান",
+    statDays: "রিচার্জের সময়কাল",
+    bandScaleTitle: "অভ্যন্তরীণ দৈনিক অনুমান শ্রেণী (সরকারি বোর্ডের শ্রেণীবিভাগ নয়)",
+    bandLow: "কম (< ₹25/দিন)",
+    bandMod: "মাঝারি (₹25–₹60/দিন)",
+    bandHigh: "বেশি (> ₹60/দিন)",
+    chartTitle: "৩০ দিনের ক্রমপুঞ্জিত রিচার্জ অনুমান",
+    chartBadge: "গাণিতিক অনুমান • প্রকৃত বিল নয়",
+    day1Label: "দিন ১",
+    day7Label: "দিন ৭",
+    day15Label: "দিন ১৫",
+    day30Label: "দিন ৩০",
+    insightsTitle: "স্মার্ট রিচার্জ খরচ বিশ্লেষণ",
+    insightDailyTpl: "আপনার ₹{amount} টাকার রিচার্জ {days} {daysWord} চলায় দৈনিক গড় ওয়ালেট কর্তন হচ্ছে {daily}।",
+    insightMonthlyTpl: "এই একই গতিতে ৩০ দিনে আনুমানিক প্রিপেইড রিচার্জ খরচ হবে {monthly} (মাসে ₹{amount} টাকার প্রায় {rechargesPerMonth} বার রিচার্জ)।",
+    insightBandLow: "এটি MeterHisab-এর 'কম' অভ্যন্তরীণ অনুমান শ্রেণীতে (₹25/দিনের নিচে) পড়ে। এটি কেবল ব্যক্তিগত বাজেটের জন্য, বিদ্যুৎ বোর্ডের সরকারি স্ল্যাব নয়।",
+    insightBandMod: "এটি MeterHisab-এর 'মাঝারি' অভ্যন্তরীণ অনুমান শ্রেণীতে (₹25 থেকে ₹60/দিন) পড়ে। এটি কেবল ব্যক্তিগত বাজেটের জন্য, বিদ্যুৎ বোর্ডের সরকারি স্ল্যাব নয়।",
+    insightBandHigh: "এটি MeterHisab-এর 'বেশি' অভ্যন্তরীণ অনুমান শ্রেণীতে (₹60/দিনের উপরে) পড়ে। বেশি কর্তন মিটার নষ্ট হওয়ার প্রমাণ নয়—ফিক্সড চার্জ বা বকেয়া কাটা হয়েছে কিনা দেখুন।",
+    insightActionTpl: "পরামর্শ: আপনার {board} অ্যাপ বা প্রিপেইড লেজারে দৈনিক ব্যবহৃত ইউনিট (kWh), ফিক্সড ডিমান্ড চার্জ এবং সরকারি শুল্ক মিলিয়ে দেখুন।",
+    breakTitle: "প্রিপেইড রিচার্জ হিসাবের বিবরণ",
     boardRow: "বিদ্যুৎ বোর্ড",
     rechargeAmount: "রিচার্জ করা টাকা",
     dailyRate: "দৈনিক গড় ব্যালেন্স কর্তন",
     monthlyProjection: "৩০ দিনের আনুমানিক রিচার্জ খরচ",
-    applianceTitle: "💡 বাড়ির বিদ্যুৎ লোডের ধারণা",
-    warningTitle: "⚠️ প্রিপেইড ব্যালেন্স কাটা = প্রকৃত বিদ্যুৎ খরচ কেন নয়?",
+    applianceTitle: "বাড়ির বিদ্যুৎ লোডের ধারণা",
+    warningTitle: "প্রিপেইড ব্যালেন্স কাটা = প্রকৃত বিদ্যুৎ খরচ কেন নয়?",
     warnPoint1: "প্রিপেইড ব্যালেন্স থেকে ইউনিট (kWh) খরচের পাশাপাশি দৈনিক ফিক্সড চার্জ, ইলেকট্রিসিটি ডিউটি বা পুরনো বকেয়ার কিস্তি কাটতে পারে।",
     warnPoint2: "শুধু রিচার্জ দ্রুত শেষ হওয়া মানেই স্মার্ট মিটার খারাপ—এটি প্রমাণিত হয় না।",
     warnPoint3: "আমরা কোনো অনুমানভিত্তিক ট্যারিফ রেট বসাই না। অভিযোগ করার আগে আপনার বোর্ডের সরকারি অ্যাপ (যেমন MyAPDCL/WBSEDCL) এবং মিটারের kWh রিডিং অবশ্যই যাচাই করুন।",
-    statusBtn: "📲 WhatsApp Status ছবি",
-    shareBtn: "👨‍👩‍👧 WhatsApp-এ শেয়ার করুন",
-    letterBtn: "📄 লেজার যাচাইয়ের আবেদন ডাউনলোড করুন",
-    againBtn: "↻ রিচার্জের তথ্য বদলান",
+    statusBtn: "WhatsApp Status ছবি",
+    shareBtn: "WhatsApp-এ শেয়ার করুন",
+    letterBtn: "লেজার যাচাইয়ের আবেদন ডাউনলোড করুন",
+    againBtn: "রিচার্জের তথ্য বদলান",
     safeTitle: "দৈনিক রিচার্জ কর্তনের হার কম",
     safeText: "আপনার দৈনিক গড় ব্যালেন্স কাটার হার তুলনামূলকভাবে কম। মনে রাখবেন এটি শুধু রিচার্জ খরচের গতি, মিটারের প্রযুক্তিগত পরীক্ষা নয়।",
     warnTitle: "দৈনিক রিচার্জ কর্তনের হার মাঝারি",
@@ -1169,6 +1942,36 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     daysUnit: "দিন",
     dayUnitSingle: "দিন",
     perDaySuffix: "/ দিন",
+    historyTitle: "সাম্প্রতিক হিসাবের ইতিহাস",
+    historySub: "শুধুমাত্র আপনার ব্রাউজারে সংরক্ষিত থাকে (সর্বোচ্চ ১০টি)। কোনো সার্ভারে পাঠানো হয় না।",
+    clearAllBtn: "সব মুছুন",
+    clearConfirmText: "আপনি কি ব্রাউজারে সংরক্ষিত সব হিসাব মুছে ফেলতে চান?",
+    confirmYes: "হ্যাঁ, সব মুছুন",
+    confirmNo: "বাতিল করুন",
+    historyEmpty: "এখনো কোনো হিসাব সংরক্ষিত হয়নি। উপরে হিসাব করলে এখানে স্বয়ংক্রিয়ভাবে যুক্ত হবে।",
+    reopenBtn: "খুলুন",
+    setABtn: "A-তে নিন",
+    setBBtn: "B-তে নিন",
+    deleteBtn: "মুছুন",
+    compareTitle: "দুটি রিচার্জ হিসাব তুলনা করুন",
+    compareSub: "দুটি ভিন্ন রিচার্জের দৈনিক কর্তন এবং ৩০ দিনের অনুমানের পাশাপাশি তুলনা করুন।",
+    compareHeaderA: "হিসাব A (প্রথম রিচার্জ)",
+    compareHeaderB: "হিসাব B (দ্বিতীয় রিচার্জ)",
+    loadFromHistory: "পুরনো ইতিহাস থেকে নিন (ঐচ্ছিক)",
+    manualEntryOpt: "-- নিজে সংখ্যা লিখুন --",
+    amountLabelShort: "রিচার্জের টাকা A (₹)",
+    daysLabelShort: "দিনের সংখ্যা A",
+    amountLabelShortB: "রিচার্জের টাকা B (₹)",
+    daysLabelShortB: "দিনের সংখ্যা B",
+    runCompareBtn: "দুটি রিচার্জ তুলনা করুন",
+    compColMetric: "বিবরণ",
+    compColA: "রিচার্জ A",
+    compColB: "রিচার্জ B",
+    compColDiff: "পার্থক্য",
+    compHigherA: "হিসাব A-তে দৈনিক কর্তন বেশি (+{diff})",
+    compHigherB: "হিসাব B-তে দৈনিক কর্তন বেশি (+{diff})",
+    compEqual: "দুটি হিসাবেই দৈনিক কর্তনের হার সমান",
+    compareDisclaimer: "নোট: অধিক দৈনিক রিচার্জ কর্তন কেবল দ্রুত ব্যালেন্স শেষ হওয়া বোঝায় (যাতে ফিক্সড চার্জ বা বকেয়া থাকতে পারে); এটি অধিক বিদ্যুৎ (kWh) খরচের প্রমাণ নয়।",
     statusHeader: "প্রিপেইড রিচার্জ খরচের অনুমান",
     statusSub: "দৈনিক গড় ব্যালেন্স কর্তন",
     statusRechargeLine: "রিচার্জের টাকা",
@@ -1179,27 +1982,28 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     statusDisclaimer2: "ব্যালেন্স কাটার মধ্যে ফিক্সড চার্জ বা বকেয়া থাকতে পারে; এটি মিটার ত্রুটির প্রমাণ নয়।",
     imageModalTitle: "WhatsApp Status কার্ড",
     imageModalHint: "পরামর্শ: আপনার ফোন ব্রাউজারে ডাউনলোড শুরু না হলে উপরের ছবিটি চেপে ধরে (Long-press) সেভ বা শেয়ার করুন।",
-    saveImageBtn: "⬇ ছবি সেভ করুন",
-    shareImageBtn: "📤 ছবি শেয়ার করুন",
+    saveImageBtn: "ছবি সেভ করুন",
+    shareImageBtn: "ছবি শেয়ার করুন",
     letterModalTitle: "প্রিপেইড লেজার যাচাইয়ের আবেদনপত্র",
     letterModalHint: "আপনি এই আবেদনটি .TXT ফাইল হিসেবে ডাউনলোড করতে পারেন অথবা কপি করে সরাসরি WhatsApp/Email-এ পেস্ট করতে পারেন।",
-    saveTxtBtn: "⬇ .TXT ডাউনলোড করুন",
-    copyTxtBtn: "📋 আবেদন কপি করুন",
+    saveTxtBtn: ".TXT ডাউনলোড করুন",
+    copyTxtBtn: "আবেদন কপি করুন",
     copiedToast: "আবেদন কপি হয়েছে!",
     downloadedToast: "ডাউনলোড শুরু হয়েছে!",
+    loadedToast: "হিসাব লোড হয়েছে!",
     shareTextTemplate: "⚡ MeterHisab হিসাব ({board}): আমার ₹{amount} টাকার স্মার্ট মিটার রিচার্জ {days} {daysWord} চলেছে — অর্থাৎ দৈনিক গড় {daily} ({monthly} প্রতি ৩০ দিন) ব্যালেন্স কর্তন। নোট: এটি রিচার্জ খরচের অনুমান মাত্র, সরকারি বিল বা মিটার ত্রুটির প্রমাণ নয়।",
     letterTitle: "প্রিপেইড স্মার্ট মিটারের লেজার ও ব্যালেন্স কর্তনের বিবরণের জন্য আবেদন",
     letterBody: "প্রতি,\nসাব-ডিভিশনাল ইঞ্জিনিয়ার / সহকারী মহাব্যবস্থাপক,\n{board}\n[বিদ্যুৎ সাব-ডিভিশন / অফিসের নাম লিখুন]\n\nবিষয়: প্রিপেইড স্মার্ট মিটারের ব্যালেন্স কর্তন এবং ইউনিট (kWh) খরচের বিস্তারিত লেজার বিবরণের জন্য আবেদন\n\nমহাশয় / মহাশয়া,\n\nআমি আপনার দপ্তরের অধীনস্থ একজন নথিভুক্ত বিদ্যুৎ গ্রাহক। আমার বিবরণ নিচে দেওয়া হলো:\n- গ্রাহকের নাম: [সম্পূর্ণ নাম লিখুন]\n- গ্রাহক / অ্যাকাউন্ট নম্বর: [গ্রাহক নম্বর লিখুন]\n- স্মার্ট মিটার সিরিয়াল নম্বর: [মিটার নম্বর লিখুন]\n- ঠিকানা: [সম্পূর্ণ ঠিকানা লিখুন]\n- রেজিস্টার্ড মোবাইল নম্বর: [মোবাইল নম্বর লিখুন]\n\nআমি আমার সাম্প্রতিক প্রিপেইড রিচার্জ কর্তনের হিসাব বুঝতে চাই। আমার ব্যক্তিগত রিচার্জের হিসাব অনুযায়ী (শুধু রেফারেন্সের জন্য):\n- বিদ্যুৎ বোর্ড: {board}\n- রিচার্জের টাকা: {amount}\n- রিচার্জ চলার সময়কাল: {days} {daysWord}\n- দৈনিক গড় ব্যালেন্স কর্তন: {daily}\n- ৩০ দিনের আনুমানিক রিচার্জ কর্তন: {monthly}\n\nআমি জানি যে প্রিপেইড ব্যালেন্স কর্তনের মধ্যে ইউনিট (kWh) খরচের পাশাপাশি দৈনিক ফিক্সড চার্জ, সরকারি শুল্ক বা পুরনো বকেয়ার কিস্তি অন্তর্ভুক্ত থাকতে পারে এবং কেবল রিচার্জ শেষ হওয়ার গতি মিটারের ত্রুটি প্রমাণ করে না।\n\nঅতএব, আপনার কাছে বিনীত অনুরোধ:\n১. দৈনিক ব্যবহৃত ইউনিট (kWh), প্রযোজ্য ট্যারিফ স্ল্যাব, ফিক্সড চার্জ এবং বকেয়া কর্তনসহ একটি পূর্ণাঙ্গ প্রিপেইড লেজার স্টেটমেন্ট প্রদান করুন।\n২. আমার স্মার্ট মিটারের রিডিং এবং প্রিপেইড ওয়ালেট কর্তন সঠিকভাবে সিঙ্ক হচ্ছে কিনা তা যাচাই করুন।\n\nধন্যবাদান্তে,\n\nবিনীত,\n[স্বাক্ষর]\n[নাম]\nতারিখ: {date}\n\nসংযুক্তি: সাম্প্রতিক রিচার্জ রসিদ এবং গ্রাহক আইডির কপি।",
     footerText: "MeterHisab • গ্রাহক রিচার্জ খরচ অনুমানকারী • স্বতন্ত্র টুল, APDCL বা কোনো বিদ্যুৎ বোর্ডের সাথে যুক্ত নয়"
   },
   bho: {
-    topBadge: "प्रीपेड रिचार्ज ट्रैकर",
+        topBadge: "प्रीपेड रिचार्ज ट्रैकर",
     eyebrow: "स्मार्ट मीटर रिचार्ज खरचा जांच",
     headline: "रिचार्ज बैलेंस जल्दी घट रहल बा? 1 मिनट में रोज के रिचार्ज खरचा जानीं।",
     subheadline: "बिजली ऑफिस जाये से पहिले अपना प्रीपेड रिचार्ज के रोजाना आ 30-दिन के औसत बैलेंस कटौती के हिसाब जोड़ीं।",
     trust: "100% मुफ्त • लॉगिन ना चाहीं • फोन पर तुरंत काम करी",
-    formTitle: "🔎 अपना रिचार्ज के जानकारी भरीं",
-    boardLabel: "⚡ 1. आपन राज्य / बिजली बोर्ड चुनीं",
+    formTitle: "अपना रिचार्ज के जानकारी भरीं",
+    boardLabel: "1. आपन राज्य / बिजली बोर्ड चुनीं",
     board_APDCL: "असम (APDCL)",
     board_SBPDCL: "बिहार (SBPDCL)",
     board_NBPDCL: "बिहार (NBPDCL)",
@@ -1209,31 +2013,49 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     board_MPPKVVCL: "मध्य प्रदेश (DISCOMs)",
     board_OTHER: "दोसर राज्य / बिजली बोर्ड",
     boardHint: "ई रउरा प्रीपेड रिचार्ज घटे के रफ्तार बतावेला, सरकारी यूनिट (kWh) टैरिफ बिल ना।",
-    amountLabel: "💰 2. केतना रुपिया के रिचार्ज कइनी? (₹)",
-    daysLabel: "📅 3. ई रिचार्ज केतना दिन चलल?",
-    applianceLabel: "🏠 4. का घर में AC भा बड़ पानी के मोटर चलेला? (वैकल्पिक)",
+    amountLabel: "2. केतना रुपिया के रिचार्ज कइनी? (₹)",
+    daysLabel: "3. ई रिचार्ज केतना दिन चलल?",
+    applianceLabel: "4. का घर में AC भा बड़ पानी के मोटर चलेला? (वैकल्पिक)",
     no: "ना, खाली पंखा / लाइट / टीवी",
     yes: "हँ, AC भा बड़ मोटर बा",
     applianceHint: "ई खाली नीचे दिहल लोड के जानकारी खातिर बा। एहसे रउरा रिचार्ज के गणित ना बदली।",
-    check: "🔍 हमार मीटर हिसाब देखीं",
+    check: "हमार मीटर हिसाब देखीं",
     error: "कृपया सही रिचार्ज रकम (₹1 से ₹1,00,000) आ पूरा दिन के संख्या (1 से 365) भरीं।",
     badgeEstimate: "खाली अनुमान • सरकारी बिजली बिल ना ह",
-    statMonthly: "📅 30 दिन के रिचार्ज अनुमान",
-    statDays: "⌛ रिचार्ज चलल",
-    breakTitle: "🧾 प्रीपेड रिचार्ज हिसाब के ब्यौरा",
+    kpiDaily: "रोज के औसत कटौती",
+    statMonthly: "30 दिन के रिचार्ज अनुमान",
+    statDays: "रिचार्ज अवधि",
+    bandScaleTitle: "आंतरिक दैनिक अनुमान श्रेणी (सरकारी बिजली बोर्ड के श्रेणी ना ह)",
+    bandLow: "कम (< ₹25/दिन)",
+    bandMod: "मध्यम (₹25–₹60/दिन)",
+    bandHigh: "जादे (> ₹60/दिन)",
+    chartTitle: "30-दिन के कुल रिचार्ज अनुमान",
+    chartBadge: "गणितीय अनुमान • असली बिजली बिल ना ह",
+    day1Label: "दिन 1",
+    day7Label: "दिन 7",
+    day15Label: "दिन 15",
+    day30Label: "दिन 30",
+    insightsTitle: "स्मार्ट रिचार्ज खरचा जानकारी",
+       insightDailyTpl: "रउरा ₹{amount} के रिचार्ज {days} {daysWord} चलला पर रोज के औसत वॉलेट कटौती {daily} बा।",
+    insightMonthlyTpl: "एही रफ्तार से 30 दिन के अनुमानित प्रीपेड रिचार्ज खरचा {monthly} होई (महीना में ₹{amount} के करीब {rechargesPerMonth} रिचार्ज)।",
+    insightBandLow: "ई MeterHisab के 'कम' आंतरिक अनुमान श्रेणी (₹25/दिन से कम) में आवेला। ई खाली घरेलू बजट खातिर बा, बिजली बोर्ड के सरकारी स्लैब ना ह।",
+    insightBandMod: "ई MeterHisab के 'मध्यम' आंतरिक अनुमान श्रेणी (₹25 से ₹60/दिन) में आवेला। ई खाली घरेलू बजट खातिर बा, बिजली बोर्ड के सरकारी स्लैब ना ह।",
+    insightBandHigh: "ई MeterHisab के 'जादे' आंतरिक अनुमान श्रेणी (₹60/दिन से ऊपर) में आवेला। तेज कटौती मीटर खराब होखे के सबूत ना ह—जांचीं कि फिक्स चार्ज भा बकाया त नइखे कटल।",
+    insightActionTpl: "सुझाव: अपना {board} ऐप भा प्रीपेड लेजर में रोज के यूनिट (kWh), फिक्स चार्ज आ सरकारी ड्यूटी जरूर मिलाईं।",
+    breakTitle: "प्रीपेड रिचार्ज हिसाब के ब्यौरा",
     boardRow: "बिजली बोर्ड",
     rechargeAmount: "रिचार्ज के रकम",
     dailyRate: "रोज के औसत बैलेंस कटौती",
     monthlyProjection: "30 दिन के अनुमानित रिचार्ज खरचा",
-    applianceTitle: "💡 घर के बिजली लोड के समझ",
-    warningTitle: "⚠️ प्रीपेड बैलेंस कटौती = असली बिजली खपत काहे ना होला?",
+    applianceTitle: "घर के बिजली लोड के समझ",
+    warningTitle: "प्रीपेड बैलेंस कटौती = असली बिजली खपत काहे ना होला?",
     warnPoint1: "प्रीपेड बैलेंस में से यूनिट (kWh) खरचा के अलावा रोज के फिक्स चार्ज, बिजली ड्यूटी भा पुरान बकाया के किस्त भी कट सकेला।",
     warnPoint2: "खाली रिचार्ज जल्दी खतम होखला से ई साबित ना होला कि स्मार्ट मीटर खराब बा।",
     warnPoint3: "हमनी के कवनो अंदाजी टैरिफ रेट ना जोड़ेनी जा। शिकायत करे से पहिले अपना बोर्ड के सरकारी ऐप (जइसे Bihar Bijli Smart Meter / MyAPDCL) आ मीटर के kWh रीडिंग जरूर जांचीं।",
-    statusBtn: "📲 WhatsApp Status फोटो",
-    shareBtn: "👨‍👩‍👧 WhatsApp पर भेजीं",
-    letterBtn: "📄 लेजर जांच आवेदन डाउनलोड करीं",
-    againBtn: "↻ रिचार्ज जानकारी बदलीं",
+    statusBtn: "WhatsApp Status फोटो",
+    shareBtn: "WhatsApp पर भेजीं",
+    letterBtn: "लेजर जांच आवेदन डाउनलोड करीं",
+    againBtn: "रिचार्ज जानकारी बदलीं",
     safeTitle: "रोज के रिचार्ज कटौती कम बा",
     safeText: "रउरा रोज के औसत बैलेंस कटौती कम लउकत बा। ध्यान रखीं ई खाली रिचार्ज खरचा के रफ्तार ह, मीटर के जांच ना।",
     warnTitle: "रोज के रिचार्ज कटौती मध्यम बा",
@@ -1245,6 +2067,36 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     daysUnit: "दिन",
     dayUnitSingle: "दिन",
     perDaySuffix: "/ दिन",
+    historyTitle: "हाल के रिचार्ज हिसाब के इतिहास",
+    historySub: "ई इतिहास खाली रउरा ब्राउज़र में सुरक्षित रहेला (अधिकतम 10 रिकॉर्ड)। कवनो सर्वर पर ना भेजल जाला।",
+    clearAllBtn: "सब हटाईं",
+    clearConfirmText: "का रउरा ब्राउज़र में सेव भइल सब हिसाब हटावल चाहत बानी?",
+    confirmYes: "हँ, सब हटाईं",
+    confirmNo: "रहने दीं",
+    historyEmpty: "अभी कवनो हिसाब सेव नइखे। ऊपर रिचार्ज के हिसाब जोड़ीं, ऊ इहाँ अपने आप सेव हो जाई।",
+    reopenBtn: "खोलीं",
+    setABtn: "A में चुनीं",
+    setBBtn: "B में चुनीं",
+    deleteBtn: "हटाईं",
+    compareTitle: "दू गो रिचार्ज हिसाब के तुलना करीं",
+    compareSub: "दू गो अलग-अलग रिचार्ज के रोजाना कटौती आ 30-दिन के अनुमान के आपस में तुलना करीं।",
+    compareHeaderA: "हिसाब A (पहिला रिचार्ज)",
+    compareHeaderB: "हिसाब B (दूसरा रिचार्ज)",
+    loadFromHistory: "पुरान इतिहास से चुनीं (वैकल्पिक)",
+    manualEntryOpt: "-- खुद नंबर भरीं --",
+    amountLabelShort: "रिचार्ज रकम A (₹)",
+    daysLabelShort: "अवधि A (दिन)",
+    amountLabelShortB: "रिचार्ज रकम B (₹)",
+    daysLabelShortB: "अवधि B (दिन)",
+    runCompareBtn: "दूनो रिचार्ज के तुलना करीं",
+    compColMetric: "ब्यौरा",
+    compColA: "रिचार्ज A",
+    compColB: "रिचार्ज B",
+    compColDiff: "अंतर",
+    compHigherA: "हिसाब A में रोज के कटौती जादे बा (+{diff})",
+    compHigherB: "हिसाब B में रोज के कटौती जादे बा (+{diff})",
+    compEqual: "दूनो रिचार्ज में रोज के कटौती बराबर बा",
+    compareDisclaimer: "नोट: जादे दैनिक रिचार्ज कटौती के मतलब खाली बैलेंस तेजी से घटल ह (जेहमें फिक्स चार्ज भा बकाया हो सकेला); ई जादे बिजली (kWh) खपत के सबूत ना ह।",
     statusHeader: "प्रीपेड रिचार्ज खरचा अनुमान",
     statusSub: "रोज के औसत बैलेंस कटौती",
     statusRechargeLine: "रिचार्ज रकम",
@@ -1255,14 +2107,15 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
     statusDisclaimer2: "बैलेंस कटौती में फिक्स चार्ज भा बकाया हो सकेला; ई मीटर खराबी के सबूत ना ह।",
     imageModalTitle: "WhatsApp Status कार्ड",
     imageModalHint: "सुझाव: अगर रउरा फोन ब्राउज़र में डाउनलोड शुरू ना होखे, त ऊपर के फोटो के दबा के रखीं (Long-press) आ सेव/शेयर करीं।",
-    saveImageBtn: "⬇ फोटो सेव करीं",
-    shareImageBtn: "📤 फोटो शेयर करीं",
+    saveImageBtn: "फोटो सेव करीं",
+    shareImageBtn: "फोटो शेयर करीं",
     letterModalTitle: "प्रीपेड लेजर जांच आवेदन-पत्र",
     letterModalHint: "रउरा ई आवेदन के .TXT फाइल में डाउनलोड कर सकीला भा कॉपी करके सीधा WhatsApp/Email में पेस्ट कर सकीला।",
-    saveTxtBtn: "⬇ .TXT डाउनलोड करीं",
-    copyTxtBtn: "📋 आवेदन कॉपी करीं",
+    saveTxtBtn: ".TXT डाउनलोड करीं",
+    copyTxtBtn: "आवेदन कॉपी करीं",
     copiedToast: "आवेदन कॉपी हो गइल!",
     downloadedToast: "डाउनलोड शुरू हो गइल!",
+    loadedToast: "हिसाब लोड हो गइल!",
     shareTextTemplate: "⚡ MeterHisab जांच ({board}): हमार ₹{amount} के स्मार्ट मीटर रिचार्ज {days} {daysWord} चलल — मने रोज के औसत {daily} ({monthly} प्रति 30 दिन) बैलेंस कटौती। नोट: ई रिचार्ज खरचा के अनुमान ह, सरकारी बिल भा मीटर खराबी के सबूत ना।",
     letterTitle: "प्रीपेड स्मार्ट मीटर लेजर आ बैलेंस कटौती के जानकारी खातिर आवेदन",
     letterBody: "सेवा में,\nउप-मंडल अभियंता / सहायक महाप्रबंधक,\n{board}\n[बिजली उपखंड / कार्यालय के नाम लिखीं]\n\nविषय: प्रीपेड स्मार्ट मीटर के बैलेंस कटौती आ यूनिट (kWh) खपत के पूरा लेजर स्टेटमेंट देवे के संबंध में\n\nमहोदय / महोदया,\n\nहम रउरा कार्यालय के अंतर्गत एक पंजीकृत बिजली उपभोक्ता बानी। हमार जानकारी नीचे दिहल बा:\n- उपभोक्ता के नाम: [आपन पूरा नाम लिखीं]\n- उपभोक्ता / खाता नंबर: [उपभोक्ता नंबर लिखीं]\n- स्मार्ट मीटर सीरियल नंबर: [मीटर नंबर लिखीं]\n- पता: [पूरा पता लिखीं]\n- मोबाइल नंबर: [मोबाइल नंबर लिखीं]\n\nहम अपना हाल के प्रीपेड रिचार्ज कटौती के हिसाब समझल चाहत बानी। हमरा रिचार्ज रिकॉर्ड के हिसाब से (खाली संदर्भ खातिर):\n- बिजली बोर्ड: {board}\n- रिचार्ज कइल रकम: {amount}\n- रिचार्ज चले के दिन: {days} {daysWord}\n- रोज के औसत बैलेंस कटौती: {daily}\n- 30 दिन के अनुमानित रिचार्ज कटौती: {monthly}\n\nहम जानत बानी कि प्रीपेड बैलेंस कटौती में बिजली खपत (kWh) के साथे रोज के फिक्स चार्ज, बिजली ड्यूटी भा पुरान बकाया के किस्त जुड़ल हो सकेला, आ खाली रिचार्ज घटे के रफ्तार से मीटर खराब होखल साबित ना होला।\n\nएहसे रउरा से निहोरा बा कि:\n1. हमरा प्रीपेड खाता के पूरा लेजर स्टेटमेंट (रोज के यूनिट kWh, लागू टैरिफ स्लैब, फिक्स चार्ज आ बकाया कटौती सहित) उपलब्ध कराईं।\n2. ई जांच करीं कि हमरा स्मार्ट मीटर के रीडिंग आ प्रीपेड वॉलेट कटौती ठीक से सिंक बा कि ना।\n\nधन्यवाद सहित,\n\nभवदीय,\n[हस्ताक्षर]\n[नाम]\nतारीख: {date}\n\nसंलग्न: हाल के रिचार्ज रसीद आ उपभोक्ता आईडी के फोटोकॉपी।",
@@ -1273,6 +2126,8 @@ applianceHint: "ই কেৱল তলৰ লোডৰ উদাহৰণৰ �
 let currentLanguage = "en";
 let applianceChoice = "no";
 let lastResult = null;
+let lastComparison = null;
+let historyItems = [];
 let lastGeneratedBlob = null;
 let lastGeneratedDataUrl = null;
 let toastTimer = null;
@@ -1321,6 +2176,173 @@ function detectInitialLanguage() {
   return "en";
 }
 
+function computeCalculation(amountRaw, daysRaw, boardCode) {
+  if (amountRaw === "" || amountRaw === null || amountRaw === undefined) return null;
+  if (daysRaw === "" || daysRaw === null || daysRaw === undefined) return null;
+  const amount = Number(amountRaw);
+  const days = Number(daysRaw);
+  if (
+    !Number.isFinite(amount) ||
+    !Number.isFinite(days) ||
+    amount < 1 ||
+    amount > 100000 ||
+    days < 1 ||
+    days > 365 ||
+    !Number.isInteger(days)
+  ) {
+    return null;
+  }
+  const exactDaily = amount / days;
+  const daily = roundPaise(exactDaily);
+  const monthly = roundPaise(exactDaily * 30);
+  const level = daily < 25 ? "safe" : daily <= 60 ? "warn" : "danger";
+  return {
+    amount: roundPaise(amount),
+    days,
+    exactDaily,
+    daily,
+    monthly,
+    board: boardCode || "APDCL",
+    level
+  };
+}
+
+/* 8. Render 30-Day Cumulative SVG Chart via DOM APIs */
+function renderCumulativeChart(calc) {
+  const wrap = $("projectionChartWrap");
+  while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+
+  const exactDaily = calc.amount / calc.days;
+  const d1 = roundPaise(exactDaily * 1);
+  const d7 = roundPaise(exactDaily * 7);
+  const d15 = roundPaise(exactDaily * 15);
+  const d30 = calc.monthly;
+
+  $("mDay1").textContent = formatINR(d1);
+  $("mDay7").textContent = formatINR(d7);
+  $("mDay15").textContent = formatINR(d15);
+  $("mDay30").textContent = formatINR(d30);
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("viewBox", "0 0 520 190");
+
+  const padL = 54;
+  const padR = 24;
+  const padT = 22;
+  const padB = 34;
+  const plotW = 520 - padL - padR;
+  const plotH = 190 - padT - padB;
+
+  // Horizontal grid lines
+  [0, 0.5, 1].forEach(frac => {
+    const y = padT + plotH * (1 - frac);
+    const line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", String(padL));
+    line.setAttribute("y1", String(y));
+    line.setAttribute("x2", String(padL + plotW));
+    line.setAttribute("y2", String(y));
+    line.setAttribute("stroke", "#E2E8F0");
+    line.setAttribute("stroke-dasharray", frac === 0 ? "none" : "4 4");
+    line.setAttribute("stroke-width", "1");
+    svg.appendChild(line);
+
+    const labelVal = formatINR(d30 * frac);
+    const txt = document.createElementNS(svgNS, "text");
+    txt.setAttribute("x", String(padL - 8));
+    txt.setAttribute("y", String(y + 4));
+    txt.setAttribute("text-anchor", "end");
+    txt.setAttribute("font-size", "10.5");
+    txt.setAttribute("fill", "#64748B");
+    txt.setAttribute("font-weight", "600");
+    txt.textContent = labelVal;
+    svg.appendChild(txt);
+  });
+
+  // Area polygon under line
+  const x1 = padL;
+  const y1 = padT + plotH * (1 - 1 / 30);
+  const x30 = padL + plotW;
+  const y30 = padT;
+  const yBase = padT + plotH;
+
+  const area = document.createElementNS(svgNS, "polygon");
+  area.setAttribute("points", `${x1},${yBase} ${x1},${y1} ${x30},${y30} ${x30},${yBase}`);
+  area.setAttribute("fill", "rgba(0, 102, 255, 0.10)");
+  svg.appendChild(area);
+
+  // Cumulative line
+  const pathLine = document.createElementNS(svgNS, "line");
+  pathLine.setAttribute("x1", String(x1));
+  pathLine.setAttribute("y1", String(y1));
+  pathLine.setAttribute("x2", String(x30));
+  pathLine.setAttribute("y2", String(y30));
+  pathLine.setAttribute("stroke", "#0066FF");
+  pathLine.setAttribute("stroke-width", "3");
+  pathLine.setAttribute("stroke-linecap", "round");
+  svg.appendChild(pathLine);
+
+  // Milestone nodes (Day 1, Day 7, Day 15, Day 30)
+  const milestones = [
+    { day: 1, label: getText("day1Label"), val: d1 },
+    { day: 7, label: getText("day7Label"), val: d7 },
+    { day: 15, label: getText("day15Label"), val: d15 },
+    { day: 30, label: getText("day30Label"), val: d30 }
+  ];
+
+  milestones.forEach(m => {
+    const ratio = (m.day - 1) / 29;
+    const cx = padL + plotW * ratio;
+    const cy = padT + plotH * (1 - m.day / 30);
+
+    const circle = document.createElementNS(svgNS, "circle");
+    circle.setAttribute("cx", String(cx));
+    circle.setAttribute("cy", String(cy));
+    circle.setAttribute("r", "5");
+    circle.setAttribute("fill", "#0A2540");
+    circle.setAttribute("stroke", "#FFFFFF");
+    circle.setAttribute("stroke-width", "2");
+    svg.appendChild(circle);
+
+    const dayTxt = document.createElementNS(svgNS, "text");
+    dayTxt.setAttribute("x", String(cx));
+    dayTxt.setAttribute("y", String(yBase + 18));
+    dayTxt.setAttribute("text-anchor", m.day === 1 ? "start" : m.day === 30 ? "end" : "middle");
+    dayTxt.setAttribute("font-size", "11");
+    dayTxt.setAttribute("fill", "#334155");
+    dayTxt.setAttribute("font-weight", "700");
+    dayTxt.textContent = m.label;
+    svg.appendChild(dayTxt);
+  });
+
+  wrap.appendChild(svg);
+}
+
+/* 9. Render Smart Expense Insights */
+function renderSmartInsights(calc) {
+  const { amount, days, daily, monthly, board, level } = calc;
+  const daysWord = days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
+  const perDayStr = formatINR(daily) + " " + getText("perDaySuffix");
+  const rechargesPerMonth = Math.max(0.1, Math.round((30 / days) * 10) / 10);
+
+  $("insight1").textContent = getText("insightDailyTpl")
+    .replace("{amount}", String(amount))
+    .replace("{days}", String(days))
+    .replace("{daysWord}", daysWord)
+    .replace("{daily}", perDayStr);
+
+  $("insight2").textContent = getText("insightMonthlyTpl")
+    .replace("{monthly}", formatINR(monthly))
+    .replace("{rechargesPerMonth}", String(rechargesPerMonth))
+    .replace("{amount}", String(amount));
+
+  const bandKey = level === "safe" ? "insightBandLow" : level === "warn" ? "insightBandMod" : "insightBandHigh";
+  $("insight3").textContent = getText(bandKey);
+
+  $("insight4").textContent = getText("insightActionTpl")
+    .replace("{board}", getBoardLabel(board));
+}
+
 function renderResultCard() {
   if (!lastResult) return;
   const { amount, days, daily, monthly, board, level } = lastResult;
@@ -1329,14 +2351,28 @@ function renderResultCard() {
   card.className = "health " + level;
   $("healthBadge").textContent = getText("badgeEstimate");
   $("healthTitle").textContent = getText(level + "Title");
-$("healthText").textContent = getText(level + "Text");
+  $("healthText").textContent = getText(level + "Text");
 
   const perDayLabel = formatINR(daily) + " " + getText("perDaySuffix");
   const daysWord = days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
 
   $("dailySpend").textContent = perDayLabel;
+  $("kpiDailyVal").textContent = perDayLabel;
   $("monthlySpend").textContent = formatINR(monthly);
+  $("kpiAmountVal").textContent = formatINR(amount);
   $("daysShown").textContent = days + " " + daysWord;
+
+  // Band Marker Position (0 to ₹100/day mapped across 5% to 95%)
+  $("bandCurrentLabel").textContent = perDayLabel;
+  let pct = 50;
+  if (daily < 25) {
+    pct = Math.max(4, (daily / 25) * 33);
+  } else if (daily <= 60) {
+    pct = 33 + ((daily - 25) / 35) * 33;
+  } else {
+    pct = Math.min(96, 66 + ((daily - 60) / 60) * 30);
+  }
+  $("bandMarker").style.left = pct.toFixed(1) + "%";
 
   $("boardShown").textContent = getBoardLabel(board);
   $("amountShown").textContent = formatINR(amount);
@@ -1346,6 +2382,265 @@ $("healthText").textContent = getText(level + "Text");
   $("applianceText").textContent = applianceChoice === "yes"
     ? getText("applianceYes")
     : getText("applianceNo");
+
+  renderCumulativeChart(lastResult);
+  renderSmartInsights(lastResult);
+}
+
+/* 10. Calculation History Storage & Rendering */
+function loadHistoryFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      historyItems = [];
+      return;
+    }
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      historyItems = [];
+      return;
+    }
+    historyItems = parsed.filter(item =>
+      item &&
+      typeof item === "object" &&
+      Number.isFinite(Number(item.amount)) &&
+      Number.isFinite(Number(item.days)) &&
+      Number(item.amount) >= 1 &&
+      Number(item.days) >= 1
+    ).slice(0, 10);
+  } catch (_) {
+    historyItems = [];
+  }
+}
+
+function writeHistoryToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(historyItems.slice(0, 10)));
+  } catch (_) {}
+}
+
+function addCalculationToHistory(calc) {
+  const entry = {
+    id: String(Date.now()) + "_" + String(Math.floor(Math.random() * 1000)),
+    amount: calc.amount,
+    days: calc.days,
+    daily: calc.daily,
+    monthly: calc.monthly,
+    board: calc.board,
+    timestamp: new Date().toISOString()
+  };
+  // Avoid consecutive identical top entry
+  if (
+    historyItems.length > 0 &&
+    historyItems[0].amount === entry.amount &&
+    historyItems[0].days === entry.days &&
+    historyItems[0].board === entry.board
+  ) {
+    historyItems[0].timestamp = entry.timestamp;
+  } else {
+    historyItems.unshift(entry);
+  }
+  if (historyItems.length > 10) {
+    historyItems = historyItems.slice(0, 10);
+  }
+  writeHistoryToStorage();
+  renderHistorySection();
+}
+
+function deleteHistoryEntry(id) {
+  historyItems = historyItems.filter(item => item.id !== id);
+  writeHistoryToStorage();
+  renderHistorySection();
+}
+
+function clearAllHistory() {
+  historyItems = [];
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (_) {}
+  $("clearConfirmBar").classList.add("hidden");
+  renderHistorySection();
+}
+
+function populateCompareDropdowns() {
+  ["compHistoryA", "compHistoryB"].forEach(selectId => {
+    const sel = $(selectId);
+    const currentVal = sel.value;
+    while (sel.firstChild) sel.removeChild(sel.firstChild);
+
+    const defaultOpt = document.createElement("option");
+    defaultOpt.value = "";
+    defaultOpt.setAttribute("data-i18n-opt", "manualEntryOpt");
+    defaultOpt.textContent = getText("manualEntryOpt");
+    sel.appendChild(defaultOpt);
+
+    const daysWord = getText("daysUnit");
+    historyItems.forEach((item, idx) => {
+      const opt = document.createElement("option");
+      opt.value = item.id;
+      opt.textContent = `#${idx + 1}: ${formatINR(item.amount)} / ${item.days} ${daysWord} (${formatINR(item.daily)}${getText("perDaySuffix")}) - ${getBoardLabel(item.board)}`;
+      sel.appendChild(opt);
+    });
+    sel.value = currentVal;
+  });
+}
+
+function renderHistorySection() {
+  const listEl = $("historyList");
+  const emptyEl = $("historyEmptyState");
+  const clearBtn = $("clearHistoryTriggerBtn");
+
+  while (listEl.firstChild) listEl.removeChild(listEl.firstChild);
+
+  if (historyItems.length === 0) {
+    emptyEl.classList.remove("hidden");
+    clearBtn.classList.add("hidden");
+    populateCompareDropdowns();
+    return;
+  }
+
+  emptyEl.classList.add("hidden");
+  clearBtn.classList.remove("hidden");
+
+  historyItems.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "history-item";
+
+    const top = document.createElement("div");
+    top.className = "history-top";
+
+    const left = document.createElement("div");
+    const mainLine = document.createElement("div");
+    mainLine.className = "history-main";
+    const daysWord = item.days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
+    mainLine.textContent = `${formatINR(item.amount)} • ${item.days} ${daysWord} → ${formatINR(item.daily)} ${getText("perDaySuffix")}`;
+
+    const metaLine = document.createElement("div");
+    metaLine.className = "history-meta";
+    const dateStr = (item.timestamp || "").slice(0, 10);
+    metaLine.textContent = `${getBoardLabel(item.board)} • ${getText("statMonthly")}: ${formatINR(item.monthly)} • ${dateStr}`;
+
+    left.appendChild(mainLine);
+    left.appendChild(metaLine);
+
+    const btns = document.createElement("div");
+    btns.className = "history-btns";
+
+    const reopenBtn = document.createElement("button");
+    reopenBtn.type = "button";
+    reopenBtn.className = "mini-btn";
+    reopenBtn.textContent = getText("reopenBtn");
+    reopenBtn.addEventListener("click", () => {
+      $("board").value = item.board;
+      $("amount").value = String(item.amount);
+      $("days").value = String(item.days);
+      const calc = computeCalculation(item.amount, item.days, item.board);
+      if (calc) {
+        lastResult = calc;
+        renderResultCard();
+        $("resultSection").classList.add("show");
+        $("resultSection").scrollIntoView({ behavior: "smooth", block: "start" });
+        showToast(getText("loadedToast"));
+      }
+    });
+
+    const useABtn = document.createElement("button");
+    useABtn.type = "button";
+    useABtn.className = "mini-btn";
+    useABtn.textContent = getText("setABtn");
+    useABtn.addEventListener("click", () => {
+      $("compAmountA").value = String(item.amount);
+      $("compDaysA").value = String(item.days);
+      $("compHistoryA").value = item.id;
+      handleCompare();
+      $("compareSection").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    const useBBtn = document.createElement("button");
+    useBBtn.type = "button";
+    useBBtn.className = "mini-btn";
+    useBBtn.textContent = getText("setBBtn");
+    useBBtn.addEventListener("click", () => {
+      $("compAmountB").value = String(item.amount);
+      $("compDaysB").value = String(item.days);
+      $("compHistoryB").value = item.id;
+      handleCompare();
+      $("compareSection").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    const delBtn = document.createElement("button");
+    delBtn.type = "button";
+    delBtn.className = "mini-btn danger-btn";
+    delBtn.textContent = getText("deleteBtn");
+    delBtn.addEventListener("click", () => deleteHistoryEntry(item.id));
+
+    btns.appendChild(reopenBtn);
+    btns.appendChild(useABtn);
+    btns.appendChild(useBBtn);
+    btns.appendChild(delBtn);
+
+    top.appendChild(left);
+    top.appendChild(btns);
+    card.appendChild(top);
+    listEl.appendChild(card);
+  });
+
+  populateCompareDropdowns();
+}
+
+/* 11. Compare Calculations Engine */
+function renderComparisonResults() {
+  if (!lastComparison) return;
+  const { calcA, calcB } = lastComparison;
+
+  const daysWordA = calcA.days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
+  const daysWordB = calcB.days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
+  const diffDays = Math.abs(calcA.days - calcB.days);
+  const diffDaysWord = diffDays === 1 ? getText("dayUnitSingle") : getText("daysUnit");
+
+  const diffAmount = roundPaise(Math.abs(calcA.amount - calcB.amount));
+  const diffDaily = roundPaise(Math.abs(calcA.exactDaily - calcB.exactDaily));
+  const diffMonthly = roundPaise(Math.abs(calcA.monthly - calcB.monthly));
+
+  $("compValAmountA").textContent = formatINR(calcA.amount);
+  $("compValAmountB").textContent = formatINR(calcB.amount);
+  $("compDiffAmount").textContent = formatINR(diffAmount);
+
+  $("compValDaysA").textContent = `${calcA.days} ${daysWordA}`;
+  $("compValDaysB").textContent = `${calcB.days} ${daysWordB}`;
+  $("compDiffDays").textContent = `${diffDays} ${diffDaysWord}`;
+
+  $("compValDailyA").textContent = `${formatINR(calcA.daily)} ${getText("perDaySuffix")}`;
+  $("compValDailyB").textContent = `${formatINR(calcB.daily)} ${getText("perDaySuffix")}`;
+  $("compDiffDaily").textContent = `${formatINR(diffDaily)} ${getText("perDaySuffix")}`;
+
+  $("compValMonthlyA").textContent = formatINR(calcA.monthly);
+  $("compValMonthlyB").textContent = formatINR(calcB.monthly);
+  $("compDiffMonthly").textContent = formatINR(diffMonthly);
+
+  const badge = $("compareSummaryBadge");
+  const exactRateDifference = Math.abs(calcA.exactDaily - calcB.exactDaily);
+  if (exactRateDifference < 1e-10) {
+    badge.textContent = getText("compEqual");
+  } else if (calcA.exactDaily > calcB.exactDaily) {
+    badge.textContent = getText("compHigherA").replace("{diff}", `${formatINR(diffDaily)} ${getText("perDaySuffix")}`);
+  } else {
+    badge.textContent = getText("compHigherB").replace("{diff}", `${formatINR(diffDaily)} ${getText("perDaySuffix")}`);
+  }
+}
+
+function handleCompare() {
+  const calcA = computeCalculation($("compAmountA").value, $("compDaysA").value, "APDCL");
+  const calcB = computeCalculation($("compAmountB").value, $("compDaysB").value, "APDCL");
+  if (!calcA || !calcB) {
+    $("compareErrorBox").style.display = "block";
+    $("compareResultsBox").classList.remove("show");
+    return;
+  }
+  $("compareErrorBox").style.display = "none";
+  lastComparison = { calcA, calcB };
+  renderComparisonResults();
+  $("compareResultsBox").classList.add("show");
 }
 
 function setLanguage(lang) {
@@ -1373,39 +2668,26 @@ function setLanguage(lang) {
   if (lastResult) {
     renderResultCard();
   }
-}
-
-function computeCalculation(amountRaw, daysRaw, boardCode) {
-  const amount = Number(amountRaw);
-  const days = Number(daysRaw);
-  if (
-    !Number.isFinite(amount) ||
-    !Number.isFinite(days) ||
-    amount < 1 ||
-    amount > 100000 ||
-    days < 1 ||
-    days > 365 ||
-    !Number.isInteger(days)
-  ) {
-    return null;
+  renderHistorySection();
+  if (lastComparison) {
+    renderComparisonResults();
   }
-  const exactDaily = amount / days;
-  const daily = roundPaise(exactDaily);
-  const monthly = roundPaise(exactDaily * 30);
-  const level = daily < 25 ? "safe" : daily <= 60 ? "warn" : "danger";
-  return { amount: roundPaise(amount), days, daily, monthly, board: boardCode, level };
 }
 
 function handleCalculate(event) {
   if (event) event.preventDefault();
   const calc = computeCalculation($("amount").value, $("days").value, $("board").value);
   if (!calc) {
+    // Never leave an older calculation looking like the result of invalid inputs.
+    lastResult = null;
+    $("resultSection").classList.remove("show");
     $("errorBox").style.display = "block";
     return;
   }
   $("errorBox").style.display = "none";
   lastResult = calc;
   renderResultCard();
+  addCalculationToHistory(calc);
   $("resultSection").classList.add("show");
   $("resultSection").scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -1477,36 +2759,31 @@ function renderStatusCanvas() {
   const ctx = canvas.getContext("2d");
   const fontStack = 'system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Noto Sans Bengali", sans-serif';
 
-  // Background
-  ctx.fillStyle = "#eef4ff";
+  ctx.fillStyle = "#F4F7FB";
   ctx.fillRect(0, 0, 1080, 1350);
 
-  // Top Accent Bar
-  ctx.fillStyle = "#0459d6";
+  ctx.fillStyle = "#0A2540";
   ctx.fillRect(0, 0, 1080, 28);
 
-  // Brand Header
-  ctx.fillStyle = "#101828";
+  ctx.fillStyle = "#0A2540";
   ctx.font = "900 56px " + fontStack;
   ctx.fillText("⚡ MeterHisab", 72, 125);
 
-  ctx.fillStyle = "#0459d6";
+  ctx.fillStyle = "#0066FF";
   ctx.font = "800 28px " + fontStack;
   ctx.fillText(getText("statusHeader"), 72, 185);
 
-  // Main Card
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#FFFFFF";
   drawRoundedRect(ctx, 60, 225, 960, 740, 36);
   ctx.fill();
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "#cfe0ff";
+  ctx.strokeStyle = "#BDD6FF";
   ctx.stroke();
 
-  // Status Pill
   const pillColors = {
-    safe: { bg: "#eaf8f0", text: "#137a43" },
-    warn: { bg: "#fff7e8", text: "#935300" },
-    danger: { bg: "#fef2f1", text: "#b42318" }
+    safe: { bg: "#EAFAF1", text: "#0E7A46" },
+    warn: { bg: "#FFF8EB", text: "#945200" },
+    danger: { bg: "#FEF2F1", text: "#B42318" }
   };
   const pill = pillColors[lastResult.level] || pillColors.warn;
   ctx.fillStyle = pill.bg;
@@ -1516,20 +2793,17 @@ function renderStatusCanvas() {
   ctx.font = "800 28px " + fontStack;
   ctx.fillText(getText("badgeEstimate"), 130, 314);
 
-  // Daily Rate Hero
-  ctx.fillStyle = "#5e6b7c";
+  ctx.fillStyle = "#596779";
   ctx.font = "700 34px " + fontStack;
   ctx.fillText(getText("statusSub"), 105, 405);
 
-  ctx.fillStyle = "#0459d6";
+  ctx.fillStyle = "#0066FF";
   ctx.font = "900 86px " + fontStack;
   ctx.fillText(formatINR(lastResult.daily) + " " + getText("perDaySuffix"), 105, 510);
 
-  // Divider
-  ctx.fillStyle = "#dce3ec";
+  ctx.fillStyle = "#DDE4EE";
   ctx.fillRect(105, 555, 870, 2);
 
-  // Detail Rows
   const daysWord = lastResult.days === 1 ? getText("dayUnitSingle") : getText("daysUnit");
   const rows = [
     [getText("statusBoardLine"), getBoardLabel(lastResult.board)],
@@ -1540,34 +2814,32 @@ function renderStatusCanvas() {
 
   let rowY = 625;
   rows.forEach(([label, val]) => {
-    ctx.fillStyle = "#5e6b7c";
+    ctx.fillStyle = "#596779";
     ctx.font = "700 34px " + fontStack;
     ctx.fillText(label, 105, rowY);
 
-    ctx.fillStyle = "#101828";
+    ctx.fillStyle = "#0A2540";
     ctx.font = "800 36px " + fontStack;
     const valWidth = ctx.measureText(val).width;
     ctx.fillText(val, 975 - valWidth, rowY);
     rowY += 80;
   });
 
-  // Disclaimer Footer Box
-  ctx.fillStyle = "#fff9eb";
+  ctx.fillStyle = "#FFF8EB";
   drawRoundedRect(ctx, 60, 1005, 960, 240, 28);
   ctx.fill();
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "#f2cf88";
+  ctx.strokeStyle = "#F5D491";
   ctx.stroke();
 
-  ctx.fillStyle = "#5f3700";
+  ctx.fillStyle = "#5F3700";
   ctx.font = "700 27px " + fontStack;
   let nextY = drawWrappedText(ctx, "⚠️ " + getText("statusDisclaimer1"), 95, 1060, 890, 40);
   drawWrappedText(ctx, getText("statusDisclaimer2"), 95, nextY + 10, 890, 40);
 
-  // Bottom Watermark
-  ctx.fillStyle = "#344054";
+  ctx.fillStyle = "#334155";
   ctx.font = "700 26px " + fontStack;
-  ctx.fillText("MeterHisab • Consumer Recharge Expense Checker", 72, 1305);
+  ctx.fillText("MeterHisab • Consumer Recharge Expense Estimator", 72, 1305);
 
   return canvas;
 }
@@ -1608,7 +2880,7 @@ function openLetterModal() {
   $("modalLetterTextarea").value = text;
   $("modalTitle").textContent = getText("letterModalTitle");
   $("modalTextContainer").classList.remove("hidden");
-$("modalImageContainer").classList.add("hidden");
+  $("modalImageContainer").classList.add("hidden");
   $("previewModal").classList.add("open");
 
   const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
@@ -1684,6 +2956,36 @@ $("shareBtn").addEventListener("click", async () => {
   window.open(waUrl, "_blank", "noopener,noreferrer");
 });
 
+$("clearHistoryTriggerBtn").addEventListener("click", () => {
+  $("clearConfirmBar").classList.remove("hidden");
+});
+
+$("confirmClearYesBtn").addEventListener("click", clearAllHistory);
+
+$("confirmClearNoBtn").addEventListener("click", () => {
+  $("clearConfirmBar").classList.add("hidden");
+});
+
+$("compHistoryA").addEventListener("change", () => {
+  const id = $("compHistoryA").value;
+  const found = historyItems.find(item => item.id === id);
+  if (found) {
+    $("compAmountA").value = String(found.amount);
+    $("compDaysA").value = String(found.days);
+  }
+});
+
+$("compHistoryB").addEventListener("change", () => {
+  const id = $("compHistoryB").value;
+  const found = historyItems.find(item => item.id === id);
+  if (found) {
+    $("compAmountB").value = String(found.amount);
+    $("compDaysB").value = String(found.days);
+  }
+});
+
+$("runCompareBtn").addEventListener("click", handleCompare);
+
 $("closeModalBtn").addEventListener("click", closeModal);
 
 $("previewModal").addEventListener("click", e => {
@@ -1712,7 +3014,7 @@ $("shareImgDirectBtn").addEventListener("click", async () => {
       if (err && err.name === "AbortError") return;
     }
   }
-  const waUrl = "https://wa.me/?text=" + encodeURIComponent(buildShareMessage());
+    const waUrl = "https://wa.me/?text=" + encodeURIComponent(buildShareMessage());
   window.open(waUrl, "_blank", "noopener,noreferrer");
 });
 
@@ -1741,7 +3043,8 @@ $("copyTxtDirectBtn").addEventListener("click", async () => {
   } catch (_) {}
 });
 
-// Initialize default language on load
+// Initialize on load
+loadHistoryFromStorage();
 setLanguage(detectInitialLanguage());
 </script>
 </body>
