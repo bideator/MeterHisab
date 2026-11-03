@@ -1499,11 +1499,11 @@ body.modal-open {
           <small data-i18n="kpiDaily">Average Daily Deduction</small>
           <strong id="kpiDailyVal">₹50 / day</strong>
         </div>
-                <div class="stat">
+        <div class="stat">
           <small data-i18n="statMonthly">30-Day Recharge Projection</small>
           <strong id="monthlySpend">₹1,500</strong>
         </div>
-        <div class="stat">
+                <div class="stat">
           <small data-i18n="rechargeAmount">Recharge Amount Paid</small>
           <strong id="kpiAmountVal">₹500</strong>
         </div>
@@ -2499,10 +2499,10 @@ const translations = {
     statusHeader: "প্রিপেইড রিচার্জ খরচের অনুমান",
     statusSub: "দৈনিক গড় ব্যালেন্স কর্তন",
     statusRechargeLine: "রিচার্জের টাকা",
-      statusLastedLine: "রিচার্জ চলেছিল",
+    statusLastedLine: "রিচার্জ চলেছিল",
     statusMonthlyLine: "৩০ দিনের অনুমান",
     statusBoardLine: "বিদ্যুৎ বোর্ড",
-    statusDisclaimer1: "রিচার্জ ও দিনের সংখ্যার ভিত্তিতে অনুমান (সরকারি বিল নয়)।",
+        statusDisclaimer1: "রিচার্জ ও দিনের সংখ্যার ভিত্তিতে অনুমান (সরকারি বিল নয়)।",
     statusDisclaimer2: "ব্যালেন্স কাটার মধ্যে ফিক্সড চার্জ বা বকেয়া থাকতে পারে; এটি মিটার ত্রুটির প্রমাণ নয়।",
     imageModalTitle: "WhatsApp Status কার্ড",
     imageModalHint: "পরামর্শ: আপনার ফোন ব্রাউজারে ডাউনলোড শুরু না হলে উপরের ছবিটি চেপে ধরে (Long-press) সেভ বা শেয়ার করুন।",
@@ -3444,69 +3444,51 @@ function stopVoiceExplanation() {
 
 function playVoiceExplanation() {
   const statusEl = $("voiceStatusText");
-  const stopBtn = $("stopVoiceBtn");
-
   if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
     if (statusEl) statusEl.textContent = getText("voiceUnsupported");
     return;
   }
+  try {
+    window.speechSynthesis.cancel();
+    const useHindiVoice = currentLanguage !== "en";
+    const scriptKey = currentInstallPlatform === "ios"
+      ? (useHindiVoice ? "voiceScriptIos" : "voiceScriptIos")
+      : "voiceScriptAndroid";
+    const textToSpeak = useHindiVoice
+      ? (translations.hi[scriptKey] || getText(scriptKey))
+      : translations.en[scriptKey];
 
-  // Keep this action directly inside the user's click event for mobile browsers.
-  const synth = window.speechSynthesis;
-  synth.cancel();
-  synth.resume();
-
-  const useHindiVoice = currentLanguage !== "en";
-  const scriptKey = currentInstallPlatform === "ios" ? "voiceScriptIos" : "voiceScriptAndroid";
-  const textToSpeak = useHindiVoice
-    ? (translations.hi[scriptKey] || getText(scriptKey))
-    : (translations.en[scriptKey] || getText(scriptKey));
-
-  if (!textToSpeak) {
-    if (statusEl) statusEl.textContent = getText("voiceUnsupported");
-    return;
-  }
-
-  const utterance = new SpeechSynthesisUtterance(textToSpeak);
-  utterance.lang = useHindiVoice ? "hi-IN" : "en-IN";
-  utterance.rate = 0.92;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
-  // Voices may load late on Android Chrome. Prefer a matching voice if available,
-  // but do not block speech if the voice list is empty.
-  const voices = synth.getVoices ? synth.getVoices() : [];
-  const prefix = useHindiVoice ? "hi" : "en";
-  const matchedVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(prefix));
-  if (matchedVoice) {
-    utterance.voice = matchedVoice;
-    utterance.lang = matchedVoice.lang;
-  }
-
-  utterance.onstart = () => {
-    if (stopBtn) stopBtn.classList.remove("hidden");
-    if (statusEl) statusEl.textContent = getText("voicePlaying");
-  };
-  utterance.onend = () => {
-    if (stopBtn) stopBtn.classList.add("hidden");
-    if (statusEl) statusEl.textContent = getText("voiceHint");
-  };
-  utterance.onerror = (event) => {
-    if (stopBtn) stopBtn.classList.add("hidden");
-    // Show a useful message instead of silently pretending audio is playing.
-    if (statusEl) {
-      statusEl.textContent = event && event.error
-        ? "Voice playback error: " + event.error + ". Check your phone's Text-to-Speech settings."
-        : getText("voiceUnsupported");
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+    const targetLangPrefix = useHindiVoice ? "hi" : "en";
+    const matchedVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(targetLangPrefix));
+    if (matchedVoice) {
+      utterance.voice = matchedVoice;
+      utterance.lang = matchedVoice.lang;
+    } else {
+      utterance.lang = useHindiVoice ? "hi-IN" : "en-IN";
     }
-  };
+    utterance.rate = 0.95;
 
-  if (stopBtn) stopBtn.classList.remove("hidden");
-  if (statusEl) statusEl.textContent = getText("voicePlaying");
-  synth.speak(utterance);
+    utterance.onstart = () => {
+      $("stopVoiceBtn").classList.remove("hidden");
+      if (statusEl) statusEl.textContent = getText("voicePlaying");
+    };
+    utterance.onend = () => {
+      $("stopVoiceBtn").classList.add("hidden");
+      if (statusEl) statusEl.textContent = getText("voiceHint");
+    };
+    utterance.onerror = () => {
+      $("stopVoiceBtn").classList.add("hidden");
+      if (statusEl) statusEl.textContent = getText("voiceHint");
+    };
 
-    // Some Android WebView/Chrome builds need resume() after speak().
-  synth.resume();
+    $("stopVoiceBtn").classList.remove("hidden");
+    if (statusEl) statusEl.textContent = getText("voicePlaying");
+    window.speechSynthesis.speak(utterance);
+  } catch (_) {
+    if (statusEl) statusEl.textContent = getText("voiceUnsupported");
+  }
 }
 
 function switchInstallPlatformTab(platform) {
