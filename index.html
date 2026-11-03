@@ -1378,9 +1378,36 @@ body.modal-open {
     display: none;
   }
 }
+
+/* MeterHisab launch splash */
+#meterSplash{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#0A2540;color:#fff;opacity:1;visibility:visible;transition:opacity .42s ease,visibility .42s ease}
+#meterSplash.splash-hide{opacity:0;visibility:hidden;pointer-events:none}
+#meterSplash .splash-inner{display:flex;flex-direction:column;align-items:center;gap:14px;transform:translateY(0);animation:splashRise .65s ease both}
+#meterSplash .splash-mark{width:94px;height:94px;border-radius:26px;background:#102F50;display:grid;place-items:center;box-shadow:0 12px 35px rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.12)}
+#meterSplash .splash-bolt{font-size:58px;line-height:1;color:#FFD12E;text-shadow:0 4px 18px rgba(255,209,46,.18)}
+#meterSplash .splash-name{font-size:27px;font-weight:800;letter-spacing:-.7px}
+#meterSplash .splash-name span{color:#FFD12E}
+#meterSplash .splash-caption{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:#B9C9DA}
+#meterSplash .splash-loader{width:42px;height:3px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden;margin-top:14px}
+#meterSplash .splash-loader:after{content:"";display:block;width:45%;height:100%;background:#FFD12E;border-radius:9px;animation:splashLoad 1.05s ease-in-out infinite}
+@keyframes splashRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes splashLoad{from{transform:translateX(-110%)}to{transform:translateX(240%)}}
+@media(prefers-reduced-motion:reduce){#meterSplash,#meterSplash .splash-inner{animation:none;transition:none}#meterSplash .splash-loader:after{animation:none;width:100%}}
+
 </style>
 </head>
 <body>
+
+<!-- Launch splash: appears on every page/app launch -->
+<div id="meterSplash" role="status" aria-label="Loading MeterHisab">
+  <div class="splash-inner">
+    <div class="splash-mark"><span class="splash-bolt" aria-hidden="true">⚡</span></div>
+    <div class="splash-name">Meter<span>Hisab</span></div>
+    <div class="splash-caption">Smart Meter Calculator</div>
+    <div class="splash-loader" aria-hidden="true"></div>
+  </div>
+</div>
+
 
 <!-- 1. Compact Premium Header & 2. Language Selector -->
 <header class="topbar">
@@ -1482,7 +1509,7 @@ body.modal-open {
     </form>
   </section>
 
-  <!-- 6. Result Dashboard, 7. Analytics, 8. 30-Day Projection Chart, 9. Smart Insights -->
+    <!-- 6. Result Dashboard, 7. Analytics, 8. 30-Day Projection Chart, 9. Smart Insights -->
   <section class="result" id="resultSection" aria-live="polite">
     <div class="card">
       <!-- Status Band Header -->
@@ -1503,7 +1530,7 @@ body.modal-open {
           <small data-i18n="statMonthly">30-Day Recharge Projection</small>
           <strong id="monthlySpend">₹1,500</strong>
         </div>
-                <div class="stat">
+        <div class="stat">
           <small data-i18n="rechargeAmount">Recharge Amount Paid</small>
           <strong id="kpiAmountVal">₹500</strong>
         </div>
@@ -1994,14 +2021,14 @@ const translations = {
     applianceNo: "You selected only fans / lights / TV: Typical basic loads (2–3 fans, LED lights, TV) use ~2 to 4 kWh (units) per day. If your balance deducts rapidly without heavy appliances, inspect your prepaid ledger for fixed charges or arrear deductions.",
     daysUnit: "days",
     dayUnitSingle: "day",
-    perDaySuffix: "/ day",
+        perDaySuffix: "/ day",
     historyTitle: "Recent Calculation History",
     historySub: "Stored privately in your browser only (maximum 10 entries). Never sent to any server.",
     clearAllBtn: "Clear All",
     clearConfirmText: "Delete all saved calculations from this browser?",
     confirmYes: "Yes, Delete All",
     confirmNo: "Cancel",
-        historyEmpty: "No saved calculations yet. Run a calculation above to save it here automatically.",
+    historyEmpty: "No saved calculations yet. Run a calculation above to save it here automatically.",
     reopenBtn: "Reopen",
     setABtn: "Use as A",
     setBBtn: "Use as B",
@@ -2498,11 +2525,11 @@ const translations = {
     compareDisclaimer: "নোট: অধিক দৈনিক রিচার্জ কর্তন কেবল দ্রুত ব্যালেন্স শেষ হওয়া বোঝায় (যাতে ফিক্সড চার্জ বা বকেয়া থাকতে পারে); এটি অধিক বিদ্যুৎ (kWh) খরচের প্রমাণ নয়।",
     statusHeader: "প্রিপেইড রিচার্জ খরচের অনুমান",
     statusSub: "দৈনিক গড় ব্যালেন্স কর্তন",
-    statusRechargeLine: "রিচার্জের টাকা",
+        statusRechargeLine: "রিচার্জের টাকা",
     statusLastedLine: "রিচার্জ চলেছিল",
     statusMonthlyLine: "৩০ দিনের অনুমান",
     statusBoardLine: "বিদ্যুৎ বোর্ড",
-        statusDisclaimer1: "রিচার্জ ও দিনের সংখ্যার ভিত্তিতে অনুমান (সরকারি বিল নয়)।",
+    statusDisclaimer1: "রিচার্জ ও দিনের সংখ্যার ভিত্তিতে অনুমান (সরকারি বিল নয়)।",
     statusDisclaimer2: "ব্যালেন্স কাটার মধ্যে ফিক্সড চার্জ বা বকেয়া থাকতে পারে; এটি মিটার ত্রুটির প্রমাণ নয়।",
     imageModalTitle: "WhatsApp Status কার্ড",
     imageModalHint: "পরামর্শ: আপনার ফোন ব্রাউজারে ডাউনলোড শুরু না হলে উপরের ছবিটি চেপে ধরে (Long-press) সেভ বা শেয়ার করুন।",
@@ -3000,7 +3027,7 @@ function addCalculationToHistory(calc) {
     historyItems = historyItems.slice(0, 10);
   }
   writeHistoryToStorage();
-  renderHistorySection();
+    renderHistorySection();
 }
 
 function deleteHistoryEntry(id) {
@@ -3750,6 +3777,15 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
   });
 }
+
+
+// Hide the launch splash after the app's brief branded intro.
+(() => {
+  const splash = document.getElementById("meterSplash");
+  if (!splash) return;
+  window.setTimeout(() => splash.classList.add("splash-hide"), 1450);
+  window.setTimeout(() => splash.remove(), 1950);
+})();
 
 // Initialize on load
 loadHistoryFromStorage();
