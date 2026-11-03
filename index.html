@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0A2540">
 <title>MeterHisab 2.0 | Smart Meter Recharge Expense Estimator</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MeterHisab">
 <style>
 :root {
   --navy: #0A2540;
@@ -1053,6 +1058,250 @@ main {
   display: none !important;
 }
 
+/* Install Guide Button & Modal */
+.toprow-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.install-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1.5px solid var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-size: 12.5px;
+  font-weight: 800;
+  transition: all 0.15s ease;
+}
+
+.install-top-btn:hover {
+  background: var(--blue);
+  color: #FFFFFF;
+}
+
+.install-top-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.install-modal-card {
+  width: min(640px, 100%);
+}
+
+.install-sub {
+  margin: -6px 0 12px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.native-pwa-banner {
+  background: var(--green-soft);
+  border: 1.5px solid var(--green-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.native-pwa-banner span {
+  font-size: 13.5px;
+  font-weight: 750;
+  color: var(--green);
+}
+
+.native-pwa-btn {
+  min-height: 40px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--green);
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 800;
+}
+
+.voice-bar {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.voice-btn {
+  min-height: 38px;
+  padding: 6px 12px;
+  border-radius: 9px;
+  border: 1.5px solid var(--blue);
+  background: #FFFFFF;
+  color: var(--blue-dark);
+  font-size: 13px;
+  font-weight: 750;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.voice-btn.primary-voice {
+  background: var(--blue);
+  color: #FFFFFF;
+}
+
+.voice-btn.stop-voice {
+  border-color: var(--red-border);
+  color: var(--red);
+  background: var(--red-soft);
+}
+
+.voice-status {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.install-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.install-tab {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: #F8FAFC;
+  color: var(--ink-mid);
+  font-weight: 800;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.install-tab.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #FFFFFF;
+}
+
+.install-steps {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.install-step {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.install-note {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 0 0 14px;
+  padding: 8px 10px;
+  background: #FAFBFD;
+  border-left: 3px solid var(--blue);
+  border-radius: 6px;
+}
+
+.visual-guide-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 10px;
+}
+
+.illus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.illus-card {
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.illus-card svg {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto 6px;
+  display: block;
+}
+
+.illus-caption {
+  font-size: 12px;
+  font-weight: 750;
+  color: var(--ink-mid);
+  display: block;
+}
+
+.pwa-info-box {
+  background: var(--amber-soft);
+  border: 1px solid var(--amber-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: #5F3700;
+}
+
 /* Tablet & Desktop Enhancements */
 @media (min-width: 640px) {
   .topinner {
@@ -1122,6 +1371,12 @@ main {
   .compare-table th, .compare-table td {
     padding: 7px 3px;
   }
+  .illus-grid {
+    grid-template-columns: 1fr;
+  }
+  .badge-tag {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -1135,7 +1390,18 @@ main {
         <span class="brand-icon" aria-hidden="true">⚡</span>
         <div>Meter<span>Hisab</span></div>
       </div>
-      <span class="badge-tag" data-i18n="topBadge">Prepaid Recharge Tracker</span>
+      <div class="toprow-actions">
+        <span class="badge-tag" data-i18n="topBadge">Prepaid Recharge Tracker</span>
+        <button type="button" class="install-top-btn" id="openInstallGuideBtn" aria-haspopup="dialog" aria-controls="installGuideModal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="6" y="2" width="12" height="20" rx="2"></rect>
+            <path d="M12 7v7"></path>
+            <path d="M9 11l3 3 3-3"></path>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+          <span data-i18n="installBtnLabel">Install MeterHisab</span>
+        </button>
+      </div>
     </div>
     <nav aria-label="Language selection" class="languages" id="languageBar">
       <button type="button" class="lang active" data-lang="en">English</button>
@@ -1233,7 +1499,7 @@ main {
           <small data-i18n="kpiDaily">Average Daily Deduction</small>
           <strong id="kpiDailyVal">₹50 / day</strong>
         </div>
-        <div class="stat">
+                <div class="stat">
           <small data-i18n="statMonthly">30-Day Recharge Projection</small>
           <strong id="monthlySpend">₹1,500</strong>
         </div>
@@ -1485,6 +1751,136 @@ main {
   </div>
 </div>
 
+<!-- Installation Guide Modal -->
+<div class="modal-backdrop" id="installGuideModal" role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
+  <div class="modal-card install-modal-card">
+    <div class="modal-header">
+      <h3 id="installModalTitle" data-i18n="installModalTitle">Add MeterHisab to Your Phone Home Screen</h3>
+      <button type="button" class="close-btn" id="closeInstallModalBtn" aria-label="Close">✕</button>
+    </div>
+    <p class="install-sub" data-i18n="installModalSub">Open MeterHisab in 1 tap from your phone home screen like a regular app—no app store download required.</p>
+
+    <!-- Native PWA Prompt Banner (shown automatically when beforeinstallprompt fires) -->
+    <div class="native-pwa-banner hidden" id="nativeInstallBanner">
+      <span data-i18n="nativeInstallReady">Your browser supports direct 1-tap installation:</span>
+      <button type="button" class="native-pwa-btn" id="triggerNativeInstallBtn" data-i18n="nativeInstallBtn">Install App Now</button>
+    </div>
+
+    <!-- Built-in SpeechSynthesis Voice Guide -->
+    <div class="voice-bar">
+      <div class="voice-controls">
+        <button type="button" class="voice-btn primary-voice" id="listenInstructionsBtn">
+          <span aria-hidden="true">🔊</span>
+          <span data-i18n="listenBtn">Listen to Instructions</span>
+        </button>
+        <button type="button" class="voice-btn stop-voice hidden" id="stopVoiceBtn">
+          <span aria-hidden="true">⏹</span>
+          <span data-i18n="stopVoiceBtn">Stop Voice</span>
+        </button>
+      </div>
+      <span class="voice-status" id="voiceStatusText" data-i18n="voiceHint">Audio guide (English / Hindi voice)</span>
+    </div>
+
+    <!-- Platform Switcher Tabs (Android Chrome / iPhone Safari) -->
+    <div class="install-tabs" role="tablist" aria-label="Device platform">
+      <button type="button" class="install-tab active" id="tabAndroidBtn" role="tab" aria-selected="true" data-install-tab="android" data-i18n="tabAndroid">Android (Chrome)</button>
+      <button type="button" class="install-tab" id="tabIosBtn" role="tab" aria-selected="false" data-install-tab="ios" data-i18n="tabIos">iPhone (Safari)</button>
+    </div>
+
+    <!-- Android Instructions Panel -->
+    <div id="panelAndroid" role="tabpanel" aria-labelledby="tabAndroidBtn">
+      <ol class="install-steps">
+        <li class="install-step"><span class="step-num">1</span><span data-i18n="andStep1">Open MeterHisab in Google Chrome on your Android phone.</span></li>
+        <li class="install-step"><span class="step-num">2</span><span data-i18n="andStep2">Tap the three-dot menu icon (⋮) in the top-right corner of Chrome.</span></li>
+        <li class="install-step"><span class="step-num">3</span><span data-i18n="andStep3">Tap "Add to Home screen" or "Install app" from the menu list.</span></li>
+        <li class="install-step"><span class="step-num">4</span><span data-i18n="andStep4">Tap "Install" or "Add" on the confirmation prompt.</span></li>
+        <li class="install-step"><span class="step-num">5</span><span data-i18n="andStep5">Find the MeterHisab icon on your phone home screen for 1-tap access.</span></li>
+      </ol>
+      <p class="install-note" data-i18n="andNote">Note: Menu wording may differ slightly between Samsung Internet, Brave, Opera, or older Chrome versions.</p>
+    </div>
+
+    <!-- iPhone Instructions Panel -->
+    <div id="panelIos" class="hidden" role="tabpanel" aria-labelledby="tabIosBtn">
+      <ol class="install-steps">
+        <li class="install-step"><span class="step-num">1</span><span data-i18n="iosStep1">Open MeterHisab in the Safari browser on your iPhone or iPad.</span></li>
+        <li class="install-step"><span class="step-num">2</span><span data-i18n="iosStep2">Tap the Share button (square with an upward arrow) at the bottom toolbar.</span></li>
+        <li class="install-step"><span class="step-num">3</span><span data-i18n="iosStep3">Scroll down the share sheet and tap "Add to Home Screen".</span></li>
+        <li class="install-step"><span class="step-num">4</span><span data-i18n="iosStep4">Tap "Add" in the top-right corner to confirm.</span></li>
+        <li class="install-step"><span class="step-num">5</span><span data-i18n="iosStep5">Find the MeterHisab icon on your iPhone home screen.</span></li>
+      </ol>
+      <p class="install-note" data-i18n="iosNote">Note: Installation options and share button positions may vary slightly by iOS version and browser.</p>
+    </div>
+
+    <!-- Custom SVG Step-by-Step Visual Illustrations -->
+    <h4 class="visual-guide-title" data-i18n="visualGuideTitle">Visual Step-by-Step Guide</h4>
+    <div class="illus-grid">
+      <!-- Illustration 1: Browser Menu / Share Button -->
+      <div class="illus-card">
+        <svg viewBox="0 0 160 110" aria-hidden="true">
+          <rect x="8" y="6" width="144" height="98" rx="10" fill="#FFFFFF" stroke="#C5D0DF" stroke-width="2"/>
+          <rect x="8" y="6" width="144" height="28" rx="10" fill="#0A2540"/>
+          <rect x="18" y="14" width="86" height="12" rx="6" fill="#1E3A5F"/>
+          <circle cx="136" cy="20" r="10" fill="#0066FF"/>
+          <circle cx="136" cy="15" r="1.6" fill="#FFFFFF"/>
+          <circle cx="136" cy="20" r="1.6" fill="#FFFFFF"/>
+          <circle cx="136" cy="25" r="1.6" fill="#FFFFFF"/>
+          <rect x="24" y="48" width="112" height="14" rx="4" fill="#EEF4FF"/>
+          <rect x="24" y="70" width="76" height="12" rx="4" fill="#F1F5F9"/>
+        </svg>
+        <span class="illus-caption" data-i18n="illus1Cap">1. Browser Menu (⋮) / Share</span>
+      </div>
+
+      <!-- Illustration 2: Add to Home Screen Option -->
+      <div class="illus-card">
+        <svg viewBox="0 0 160 110" aria-hidden="true">
+          <rect x="8" y="6" width="144" height="98" rx="10" fill="#FFFFFF" stroke="#C5D0DF" stroke-width="2"/>
+          <rect x="20" y="18" width="120" height="20" rx="5" fill="#F8FAFC"/>
+          <rect x="20" y="44" width="120" height="26" rx="6" fill="#EEF4FF" stroke="#0066FF" stroke-width="2"/>
+          <rect x="28" y="51" width="12" height="12" rx="3" fill="#0066FF"/>
+          <path d="M34 54v6M31 57h6" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="46" y="53" width="82" height="8" rx="4" fill="#0A2540"/>
+          <rect x="20" y="76" width="120" height="18" rx="5" fill="#F8FAFC"/>
+        </svg>
+        <span class="illus-caption" data-i18n="illus2Cap">2. Select "Add to Home Screen"</span>
+      </div>
+
+      <!-- Illustration 3: Confirmation Prompt -->
+      <div class="illus-card">
+        <svg viewBox="0 0 160 110" aria-hidden="true">
+          <rect x="8" y="6" width="144" height="98" rx="10" fill="#F1F5F9" stroke="#C5D0DF" stroke-width="2"/>
+          <rect x="22" y="20" width="116" height="70" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+          <rect x="34" y="30" width="24" height="24" rx="6" fill="#0A2540"/>
+          <text x="46" y="47" text-anchor="middle" font-size="13" fill="#FFFFFF" font-weight="bold">⚡</text>
+          <rect x="66" y="34" width="58" height="8" rx="4" fill="#0A2540"/>
+          <rect x="66" y="46" width="42" height="6" rx="3" fill="#94A3B8"/>
+          <rect x="34" y="64" width="42" height="16" rx="5" fill="#E2E8F0"/>
+          <rect x="84" y="64" width="42" height="16" rx="5" fill="#0066FF"/>
+        </svg>
+        <span class="illus-caption" data-i18n="illus3Cap">3. Confirm "Install" / "Add"</span>
+      </div>
+
+      <!-- Illustration 4: MeterHisab Icon on Home Screen -->
+      <div class="illus-card">
+        <svg viewBox="0 0 160 110" aria-hidden="true">
+          <rect x="8" y="6" width="144" height="98" rx="10" fill="#0A2540" stroke="#1E3A5F" stroke-width="2"/>
+          <rect x="26" y="22" width="28" height="28" rx="7" fill="#334155"/>
+          <rect x="66" y="22" width="28" height="28" rx="7" fill="#0066FF" stroke="#FFFFFF" stroke-width="2"/>
+          <text x="80" y="41" text-anchor="middle" font-size="15" fill="#FFFFFF" font-weight="bold">⚡</text>
+          <rect x="106" y="22" width="28" height="28" rx="7" fill="#334155"/>
+          <rect x="58" y="56" width="44" height="6" rx="3" fill="#FFFFFF"/>
+          <rect x="48" y="86" width="64" height="5" rx="2.5" fill="#64748B"/>
+        </svg>
+        <span class="illus-caption" data-i18n="illus4Cap">4. MeterHisab on Home Screen</span>
+      </div>
+    </div>
+
+    <!-- Honest PWA vs Shortcut Technical Note -->
+    <div class="pwa-info-box" data-i18n="pwaClarificationNote">
+      Tip: Adding a home-screen shortcut lets you open MeterHisab in 1 tap. Full offline reopening requires the site's Web App Manifest (manifest.json) and Service Worker (service-worker.js) to be active over HTTPS.
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toastMsg" role="status" aria-live="polite"></div>
 
 <!-- 16. Footer & Independent-Tool Disclaimer -->
@@ -1497,7 +1893,39 @@ const STORAGE_KEY = "meterhisab_v2_history";
 
 const translations = {
   en: {
-        topBadge: "Prepaid Recharge Tracker",
+    installBtnLabel: "Install MeterHisab",
+    installModalTitle: "Add MeterHisab to Your Phone Home Screen",
+    installModalSub: "Open MeterHisab in 1 tap from your phone home screen like a regular app—no app store download required.",
+    nativeInstallReady: "Your browser supports direct 1-tap installation:",
+    nativeInstallBtn: "Install App Now",
+    listenBtn: "Listen to Instructions",
+    stopVoiceBtn: "Stop Voice",
+    voiceHint: "Audio guide (English / Hindi voice)",
+    voicePlaying: "Playing audio instructions...",
+    voiceUnsupported: "Voice playback is not supported on this browser. Please follow the written steps below.",
+    tabAndroid: "Android (Chrome)",
+    tabIos: "iPhone (Safari)",
+    andStep1: "Open MeterHisab in Google Chrome on your Android phone.",
+    andStep2: "Tap the three-dot menu icon (⋮) in the top-right corner of Chrome.",
+    andStep3: "Tap 'Add to Home screen' or 'Install app' from the menu list.",
+    andStep4: "Tap 'Install' or 'Add' on the confirmation prompt.",
+    andStep5: "Find the MeterHisab icon on your phone home screen for 1-tap access.",
+    andNote: "Note: Menu wording may differ slightly between Samsung Internet, Brave, Opera, or older Chrome versions.",
+    iosStep1: "Open MeterHisab in the Safari browser on your iPhone or iPad.",
+    iosStep2: "Tap the Share button (square with an upward arrow) at the bottom toolbar.",
+    iosStep3: "Scroll down the share sheet and tap 'Add to Home Screen'.",
+    iosStep4: "Tap 'Add' in the top-right corner to confirm.",
+    iosStep5: "Find the MeterHisab icon on your iPhone home screen.",
+    iosNote: "Note: Installation options and share button positions may vary slightly by iOS version and browser.",
+    visualGuideTitle: "Visual Step-by-Step Guide",
+    illus1Cap: "1. Browser Menu (⋮) / Share",
+    illus2Cap: "2. Select 'Add to Home Screen'",
+    illus3Cap: "3. Confirm 'Install' / 'Add'",
+    illus4Cap: "4. MeterHisab on Home Screen",
+    pwaClarificationNote: "Tip: Adding a home-screen shortcut lets you open MeterHisab in 1 tap. Full offline reopening requires the site's Web App Manifest (manifest.json) and Service Worker (service-worker.js) to be active over HTTPS.",
+    voiceScriptAndroid: "How to install MeterHisab on Android: Step 1, open MeterHisab in Google Chrome. Step 2, tap the three-dot menu in the top-right corner. Step 3, select Add to Home screen or Install app. Step 4, tap Install to confirm. MeterHisab will appear on your home screen.",
+    voiceScriptIos: "How to add MeterHisab on iPhone: Step 1, open MeterHisab in Safari. Step 2, tap the Share button at the bottom. Step 3, scroll down and tap Add to Home Screen. Step 4, tap Add in the top-right corner. MeterHisab will appear on your home screen.",
+    topBadge: "Prepaid Recharge Tracker",
     eyebrow: "SMART METER RECHARGE EXPENSE CHECKER",
     headline: "Recharge balance reducing quickly? Check your daily recharge expense in 1 minute.",
     subheadline: "Calculate your average daily and 30-day prepaid recharge deduction rate before visiting the electricity office.",
@@ -1573,7 +2001,7 @@ const translations = {
     clearConfirmText: "Delete all saved calculations from this browser?",
     confirmYes: "Yes, Delete All",
     confirmNo: "Cancel",
-    historyEmpty: "No saved calculations yet. Run a calculation above to save it here automatically.",
+        historyEmpty: "No saved calculations yet. Run a calculation above to save it here automatically.",
     reopenBtn: "Reopen",
     setABtn: "Use as A",
     setBBtn: "Use as B",
@@ -1622,6 +2050,38 @@ const translations = {
     footerText: "MeterHisab • Consumer Recharge Expense Estimator • Independent tool, not affiliated with APDCL or any electricity board"
   },
   hi: {
+    installBtnLabel: "ऐप इंस्टॉल करें",
+    installModalTitle: "MeterHisab को अपने फोन की होम स्क्रीन पर जोड़ें",
+    installModalSub: "बिना किसी ऐप स्टोर डाउनलोड के, अपने फोन की होम स्क्रीन से 1 टैप में MeterHisab खोलें।",
+    nativeInstallReady: "आपका ब्राउज़र सीधे 1-टैप इंस्टॉलेशन को सपोर्ट करता है:",
+    nativeInstallBtn: "अभी इंस्टॉल करें",
+    listenBtn: "निर्देश सुनें (Listen)",
+    stopVoiceBtn: "आवाज़ रोकें (Stop)",
+    voiceHint: "ऑडियो गाइड (हिंदी / अंग्रेज़ी आवाज़)",
+    voicePlaying: "ऑडियो निर्देश चल रहे हैं...",
+    voiceUnsupported: "इस ब्राउज़र में वॉइस सुविधा उपलब्ध नहीं है। कृपया नीचे लिखे चरणों को पढ़ें।",
+    tabAndroid: "Android (Chrome)",
+    tabIos: "iPhone (Safari)",
+    andStep1: "अपने Android फोन पर Google Chrome में MeterHisab खोलें।",
+    andStep2: "ऊपर दाईं ओर दिए गए तीन-बिंदु (⋮) मेनू पर टैप करें।",
+    andStep3: "मेनू में से 'Add to Home screen' या 'Install app' चुनें।",
+    andStep4: "कन्फर्मेशन बॉक्स में 'Install' या 'Add' पर टैप करें।",
+    andStep5: "अब आपके फोन की होम स्क्रीन पर MeterHisab का आइकन आ जाएगा।",
+    andNote: "नोट: अलग-अलग ब्राउज़र (जैसे Samsung Internet या Brave) में मेनू के शब्दों में थोड़ा अंतर हो सकता है।",
+    iosStep1: "अपने iPhone या iPad पर Safari ब्राउज़र में MeterHisab खोलें।",
+    iosStep2: "नीचे दिए गए Share बटन (ऊपर तीर वाला चौकोर आइकन) पर टैप करें।",
+    iosStep3: "नीचे स्क्रॉल करें और 'Add to Home Screen' विकल्प चुनें।",
+    iosStep4: "ऊपर दाईं ओर 'Add' बटन पर टैप करके पुष्टि करें।",
+    iosStep5: "अब आपकी होम स्क्रीन पर MeterHisab का आइकन दिखने लगेगा।",
+    iosNote: "नोट: iOS वर्शन और ब्राउज़र के अनुसार विकल्पों के स्थान में थोड़ा अंतर हो सकता है।",
+    visualGuideTitle: "चित्रों द्वारा आसान गाइड",
+    illus1Cap: "1. ब्राउज़र मेनू (⋮) / Share",
+    illus2Cap: "2. 'Add to Home Screen' चुनें",
+    illus3Cap: "3. 'Install' / 'Add' की पुष्टि करें",
+    illus4Cap: "4. होम स्क्रीन पर MeterHisab",
+    pwaClarificationNote: "जानकारी: होम-स्क्रीन शॉर्टकट से आप 1 टैप में MeterHisab खोल सकते हैं। पूर्ण ऑफलाइन उपयोग के लिए वेबसाइट पर Web App Manifest और Service Worker सक्रिय होना आवश्यक है।",
+    voiceScriptAndroid: "एंड्रॉइड फोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, गूगल क्रोम में मीटर हिसाब खोलें। दूसरा कदम, ऊपर दाईं ओर तीन बिंदु वाले मेनू पर टैप करें। तीसरा कदम, ऐड टू होम स्क्रीन या इंस्टॉल ऐप चुनें। चौथा कदम, इंस्टॉल बटन दबाकर पुष्टि करें। अब मीटर हिसाब आपके फोन की होम स्क्रीन पर आ जाएगा।",
+    voiceScriptIos: "आईफोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, सफारी ब्राउज़र में मीटर हिसाब खोलें। दूसरा कदम, नीचे दिए गए शेयर बटन पर टैप करें। तीसरा कदम, नीचे स्क्रॉल करके ऐड टू होम स्क्रीन चुनें। चौथा कदम, ऊपर दाईं ओर ऐड पर टैप करें।", 
     topBadge: "प्रीपेड रिचार्ज ट्रैकर",
     eyebrow: "स्मार्ट मीटर रिचार्ज खर्च जांचें",
     headline: "रिचार्ज बैलेंस जल्दी घट रहा है? 1 मिनट में रोज़ का रिचार्ज खर्च जानें।",
@@ -1747,6 +2207,38 @@ const translations = {
     footerText: "MeterHisab • उपभोक्ता रिचार्ज खर्च अनुमानक • स्वतंत्र टूल, APDCL या किसी बिजली बोर्ड से संबद्ध नहीं"
   },
   as: {
+    installBtnLabel: "ইনষ্টল কৰক",
+    installModalTitle: "MeterHisab আপোনাৰ ফোনৰ হ’ম স্ক্ৰীণত যোগ কৰক",
+    installModalSub: "কোনো এপ ষ্ট’ৰ ডাউনলোড নোহোৱাকৈ আপোনাৰ ফোনৰ হ’ম স্ক্ৰীণৰ পৰা ১ টেপত MeterHisab খোলক।",
+    nativeInstallReady: "আপোনাৰ ব্ৰাউজাৰে পোনপটীয়া ইনষ্টলেশ্বন সমৰ্থন কৰে:",
+    nativeInstallBtn: "এতিয়াই ইনষ্টল কৰক",
+    listenBtn: "নিৰ্দেশনা শুনক (Listen)",
+    stopVoiceBtn: "মাত বন্ধ কৰক (Stop)",
+    voiceHint: "অডিঅ’ গাইড (হিন্দী / ইংৰাজী মাত)",
+    voicePlaying: "অডিঅ’ নিৰ্দেশনা চলি আছে...",
+    voiceUnsupported: "এই ব্ৰাউজাৰত অডিঅ’ সুবিধা উপলব্ধ নহয়। অনুগ্ৰহ কৰি তলৰ লিখিত পদক্ষেপসমূহ পঢ়ক।",
+    tabAndroid: "Android (Chrome)",
+    tabIos: "iPhone (Safari)",
+    andStep1: "আপোনাৰ Android ফোনত Google Chrome ত MeterHisab খোলক।",
+    andStep2: "Chrome ৰ ওপৰৰ সোঁফালে থকা তিনিটা বিন্দুৰ মেনু (⋮) ত টেপ কৰক।",
+    andStep3: "মেনুৰ পৰা 'Add to Home screen' বা 'Install app' বাছনি কৰক।",
+    andStep4: "নিশ্চিতকৰণ বক্সত 'Install' বা 'Add' ত টেপ কৰক।",
+    andStep5: "আপোনাৰ ফোনৰ হ’ম স্ক্ৰীণত MeterHisab ৰ আইকন দেখা পাব।",
+    andNote: "টোকা: ব্ৰাউজাৰ ভেদে মেনুৰ শব্দ কিছু পৃথক হ’ব পাৰে।",
+    iosStep1: "আপোনাৰ iPhone ত Safari ব্ৰাউজাৰত MeterHisab খোলক।",
+    iosStep2: "তলত থকা Share বুটামত (ওপৰলৈ কাঁড় চিহ্ন থকা বাকচ) টেপ কৰক।",
+    iosStep3: "তললৈ স্ক্ৰ’ল কৰি 'Add to Home Screen' বাছনি কৰক।",
+    iosStep4: "ওপৰৰ সোঁফালে থকা 'Add' ত টেপ কৰক।",
+    iosStep5: "আপোনাৰ iPhone ৰ হ’ম স্ক্ৰীণত MeterHisab আইকন বিচাৰি পাব।",
+    iosNote: "টোকা: iOS সংস্কৰণ আৰু ব্ৰাউজাৰ অনুসৰি বিকল্পসমূহ সলনি হ’ব পাৰে।",
+    visualGuideTitle: "ছবিৰ সহায়ত সহজ নিৰ্দেশনা",
+    illus1Cap: "১. ব্ৰাউজাৰ মেনু (⋮) / Share",
+    illus2Cap: "২. 'Add to Home Screen' বাছনি",
+    illus3Cap: "৩. 'Install' / 'Add' নিশ্চিতকৰণ",
+    illus4Cap: "৪. হ’ম স্ক্ৰীণত MeterHisab",
+    pwaClarificationNote: "তথ্য: হ’ম-স্ক্ৰীণ শ্বৰ্টকাটৰ জৰিয়তে ১ টেপত MeterHisab খুলিব পাৰি। সম্পূৰ্ণ অফলাইন ব্যৱহাৰৰ বাবে চাইটত Web App Manifest আৰু Service Worker সক্ৰিয় থাকিব লাগিব।",
+    voiceScriptAndroid: "एंड्रॉइड फोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, गूगल क्रोम में मीटर हिसाब खोलें। दूसरा कदम, ऊपर दाईं ओर तीन बिंदु वाले मेनू पर टैप करें। तीसरा कदम, ऐड टू होम स्क्रीन या इंस्टॉल ऐप चुनें। चौथा कदम, इंस्टॉल बटन दबाकर पुष्टि करें।",
+    voiceScriptIos: "How to add MeterHisab on iPhone: Open MeterHisab in Safari, tap the Share button at the bottom, select Add to Home Screen, and tap Add.", 
     topBadge: "প্ৰিপেইড ৰিচাৰ্জ ট্ৰেকাৰ",
     eyebrow: "স্মাৰ্ট মিটাৰ ৰিচাৰ্জ খৰচ পৰীক্ষক",
     headline: "ৰিচাৰ্জ বেলেঞ্চ সোনকালে শেষ হৈছে নেকি? ১ মিনিটতে দৈনিক ৰিচাৰ্জ খৰচ জানক।",
@@ -1872,6 +2364,38 @@ const translations = {
     footerText: "MeterHisab • গ্ৰাহক ৰিচাৰ্জ খৰচ অনুমানক • স্বতন্ত্ৰ সঁজুলি, APDCL বা কোনো বিদ্যুৎ ব’ৰ্ডৰ সৈতে জড়িত নহয়"
   },
   bn: {
+    installBtnLabel: "অ্যাপ ইনস্টল করুন",
+    installModalTitle: "আপনার ফোনের হোম স্ক্রিনে MeterHisab যোগ করুন",
+    installModalSub: "অ্যাপ স্টোর থেকে ডাউনলোড ছাড়াই ফোনের হোম স্ক্রিন থেকে ১ ট্যাপে MeterHisab খুলুন।",
+    nativeInstallReady: "আপনার ব্রাউজার সরাসরি ১-ট্যাপ ইনস্টলেশন সমর্থন করে:",
+    nativeInstallBtn: "এখনই ইনস্টল করুন",
+    listenBtn: "নির্দেশনা শুনুন (Listen)",
+    stopVoiceBtn: "আওয়াজ বন্ধ করুন (Stop)",
+    voiceHint: "অডিও গাইড (হিন্দি / ইংরেজি ভয়েস)",
+    voicePlaying: "অডিও নির্দেশনা চলছে...",
+    voiceUnsupported: "এই ব্রাউজারে ভয়েস সুবিধা উপলব্ধ নেই। অনুগ্রহ করে নিচের লিখিত ধাপগুলো অনুসরণ করুন।",
+    tabAndroid: "Android (Chrome)",
+    tabIos: "iPhone (Safari)",
+    andStep1: "আপনার Android ফোনে Google Chrome-এ MeterHisab খুলুন।",
+    andStep2: "Chrome-এর উপরে ডানদিকে তিন-বিন্দু (⋮) মেনুতে ট্যাপ করুন।",
+    andStep3: "মেনু থেকে 'Add to Home screen' বা 'Install app' বেছে নিন।",
+    andStep4: "নিশ্চিতকরণ পপ-আপে 'Install' বা 'Add'-এ ট্যাপ করুন।",
+    andStep5: "এবার আপনার ফোনের হোম স্ক্রিনে MeterHisab আইকনটি দেখতে পাবেন।",
+    andNote: "নোট: বিভিন্ন ব্রাউজারে মেনুর লেখায় সামান্য পার্থক্য থাকতে পারে।",
+    iosStep1: "আপনার iPhone-এ Safari ব্রাউজারে MeterHisab খুলুন।",
+    iosStep2: "নিচের টুলবারে Share বোতামে (উপরের দিকে তীর চিহ্নযুক্ত বক্স) ট্যাপ করুন।",
+    iosStep3: "নিচে 스크্রল করে 'Add to Home Screen' বেছে নিন।",
+    iosStep4: "উপরে ডানদিকে 'Add' বোতামে ট্যাপ করে নিশ্চিত করুন।",
+    iosStep5: "আপনার iPhone-এর হোম স্ক্রিনে MeterHisab আইকনটি পেয়ে যাবেন।",
+    iosNote: "নোট: iOS সংস্করণ ও ব্রাউজার ভেদে অপশনগুলো কিছুটা ভিন্ন হতে পারে।",
+    visualGuideTitle: "ছবির মাধ্যমে ধাপে ধাপে নির্দেশনা",
+    illus1Cap: "১. ব্রাউজার মেনু (⋮) / Share",
+    illus2Cap: "২. 'Add to Home Screen' নির্বাচন",
+    illus3Cap: "৩. 'Install' / 'Add' নিশ্চিতকরণ",
+    illus4Cap: "৪. হোম স্ক্রিনে MeterHisab",
+    pwaClarificationNote: "তথ্য: হোম-স্ক্রিন শর্টকাটের মাধ্যমে ১ ট্যাপে MeterHisab খোলা যায়। সম্পূর্ণ অফলাইনে খোলার জন্য সাইটে Web App Manifest ও Service Worker সক্রিয় থাকা প্রয়োজন।",
+    voiceScriptAndroid: "एंड्रॉइड फोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, गूगल क्रोम में मीटर हिसाब खोलें। दूसरा कदम, ऊपर दाईं ओर तीन बिंदु वाले मेनू पर टैप करें। तीसरा कदम, ऐड टू होम स्क्रीन या इंस्टॉल ऐप चुनें। चौथा कदम, इंस्टॉल बटन दबाकर पुष्टि करें।",
+    voiceScriptIos: "How to add MeterHisab on iPhone: Open MeterHisab in Safari, tap the Share button at the bottom, select Add to Home Screen, and tap Add.", 
     topBadge: "প্রিপেইড রিচার্জ ট্র্যাকার",
     eyebrow: "স্মার্ট মিটার রিচার্জ খরচ পরীক্ষক",
     headline: "রিচার্জ ব্যালেন্স কি দ্রুত শেষ হচ্ছে? ১ মিনিটে দৈনিক রিচার্জ খরচ জানুন।",
@@ -1975,7 +2499,7 @@ const translations = {
     statusHeader: "প্রিপেইড রিচার্জ খরচের অনুমান",
     statusSub: "দৈনিক গড় ব্যালেন্স কর্তন",
     statusRechargeLine: "রিচার্জের টাকা",
-    statusLastedLine: "রিচার্জ চলেছিল",
+      statusLastedLine: "রিচার্জ চলেছিল",
     statusMonthlyLine: "৩০ দিনের অনুমান",
     statusBoardLine: "বিদ্যুৎ বোর্ড",
     statusDisclaimer1: "রিচার্জ ও দিনের সংখ্যার ভিত্তিতে অনুমান (সরকারি বিল নয়)।",
@@ -1997,7 +2521,39 @@ const translations = {
     footerText: "MeterHisab • গ্রাহক রিচার্জ খরচ অনুমানকারী • স্বতন্ত্র টুল, APDCL বা কোনো বিদ্যুৎ বোর্ডের সাথে যুক্ত নয়"
   },
   bho: {
-        topBadge: "प्रीपेड रिचार्ज ट्रैकर",
+    installBtnLabel: "ऐप इंस्टॉल करीं",
+    installModalTitle: "MeterHisab के अपना फोन के होम स्क्रीन पर जोड़ीं",
+    installModalSub: "बिना कवनो ऐप स्टोर डाउनलोड के, अपना फोन के होम स्क्रीन से 1 टैप में MeterHisab खोलीं।",
+    nativeInstallReady: "रउरा ब्राउज़र में सीधा 1-टैप इंस्टॉल के सुविधा उपलब्ध बा:",
+    nativeInstallBtn: "अभी इंस्टॉल करीं",
+    listenBtn: "निर्देश सुनीं (Listen)",
+    stopVoiceBtn: "आवाज रोकीं (Stop)",
+    voiceHint: "ऑडियो गाइड (हिंदी / अंग्रेजी आवाज)",
+    voicePlaying: "ऑडियो निर्देश चल रहल बा...",
+    voiceUnsupported: "एह ब्राउज़र में आवाज के सुविधा उपलब्ध नइखे। कृपया नीचे लिखल तरीका पढ़ीं।",
+    tabAndroid: "Android (Chrome)",
+    tabIos: "iPhone (Safari)",
+    andStep1: "अपना Android फोन के Google Chrome में MeterHisab खोलीं।",
+    andStep2: "ऊपर दाहिने कोना में तीन-बिंदु (⋮) मेनू पर टैप करीं।",
+    andStep3: "मेनू में से 'Add to Home screen' भा 'Install app' चुनीं।",
+    andStep4: "कन्फर्मेशन बॉक्स में 'Install' भा 'Add' पर टैप करीं।",
+    andStep5: "अब रउरा फोन के होम स्क्रीन पर MeterHisab के आइकन आ जाई।",
+    andNote: "नोट: अलग-अलग ब्राउज़र में मेनू के नाम में थोड़ा अंतर हो सकेला।",
+    iosStep1: "अपना iPhone के Safari ब्राउज़र में MeterHisab खोलीं।",
+    iosStep2: "नीचे दिहल Share बटन (ऊपर तीर वाला बक्सा) पर टैप करीं।",
+    iosStep3: "नीचे स्क्रॉल करके 'Add to Home Screen' चुनीं।",
+    iosStep4: "ऊपर दाहिने कोना में 'Add' पर टैप करके पक्का करीं।",
+    iosStep5: "अब रउरा iPhone के होम स्क्रीन पर MeterHisab के आइकन लउकी।",
+    iosNote: "नोट: iOS वर्शन आ ब्राउज़र के हिसाब से ऑप्शन थोड़ा बदल सकेला।",
+    visualGuideTitle: "फोटो के मदद से आसान तरीका",
+    illus1Cap: "1. ब्राउज़र मेनू (⋮) / Share",
+    illus2Cap: "2. 'Add to Home Screen' चुनीं",
+    illus3Cap: "3. 'Install' / 'Add' पक्का करीं",
+    illus4Cap: "4. होम स्क्रीन पर MeterHisab",
+    pwaClarificationNote: "जानकारी: होम-स्क्रीन शॉर्टकट से 1 टैप में MeterHisab खुल जाला। पूरा ऑफलाइन चले खातिर वेबसाइट पर Web App Manifest आ Service Worker सक्रिय रहल जरूरी बा।",
+    voiceScriptAndroid: "एंड्रॉइड फोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, गूगल क्रोम में मीटर हिसाब खोलें। दूसरा कदम, ऊपर दाईं ओर तीन बिंदु वाले मेनू पर टैप करें। तीसरा कदम, ऐड टू होम स्क्रीन या इंस्टॉल ऐप चुनें। चौथा कदम, इंस्टॉल बटन दबाकर पुष्टि करें।",
+    voiceScriptIos: "आईफोन पर मीटर हिसाब जोड़ने का तरीका: पहला कदम, सफारी ब्राउज़र में मीटर हिसाब खोलें। दूसरा कदम, नीचे दिए गए शेयर बटन पर टैप करें। तीसरा कदम, नीचे स्क्रॉल करके ऐड टू होम स्क्रीन चुनें। चौथा कदम, ऊपर दाईं ओर ऐड पर टैप करें।",
+    topBadge: "प्रीपेड रिचार्ज ट्रैकर",
     eyebrow: "स्मार्ट मीटर रिचार्ज खरचा जांच",
     headline: "रिचार्ज बैलेंस जल्दी घट रहल बा? 1 मिनट में रोज के रिचार्ज खरचा जानीं।",
     subheadline: "बिजली ऑफिस जाये से पहिले अपना प्रीपेड रिचार्ज के रोजाना आ 30-दिन के औसत बैलेंस कटौती के हिसाब जोड़ीं।",
@@ -2036,7 +2592,7 @@ const translations = {
     day15Label: "दिन 15",
     day30Label: "दिन 30",
     insightsTitle: "स्मार्ट रिचार्ज खरचा जानकारी",
-       insightDailyTpl: "रउरा ₹{amount} के रिचार्ज {days} {daysWord} चलला पर रोज के औसत वॉलेट कटौती {daily} बा।",
+    insightDailyTpl: "रउरा ₹{amount} के रिचार्ज {days} {daysWord} चलला पर रोज के औसत वॉलेट कटौती {daily} बा।",
     insightMonthlyTpl: "एही रफ्तार से 30 दिन के अनुमानित प्रीपेड रिचार्ज खरचा {monthly} होई (महीना में ₹{amount} के करीब {rechargesPerMonth} रिचार्ज)।",
     insightBandLow: "ई MeterHisab के 'कम' आंतरिक अनुमान श्रेणी (₹25/दिन से कम) में आवेला। ई खाली घरेलू बजट खातिर बा, बिजली बोर्ड के सरकारी स्लैब ना ह।",
     insightBandMod: "ई MeterHisab के 'मध्यम' आंतरिक अनुमान श्रेणी (₹25 से ₹60/दिन) में आवेला। ई खाली घरेलू बजट खातिर बा, बिजली बोर्ड के सरकारी स्लैब ना ह।",
@@ -2619,10 +3175,9 @@ function renderComparisonResults() {
   $("compDiffMonthly").textContent = formatINR(diffMonthly);
 
   const badge = $("compareSummaryBadge");
-  const exactRateDifference = Math.abs(calcA.exactDaily - calcB.exactDaily);
-  if (exactRateDifference < 1e-10) {
+  if (Math.abs(calcA.daily - calcB.daily) < 0.005) {
     badge.textContent = getText("compEqual");
-  } else if (calcA.exactDaily > calcB.exactDaily) {
+  } else if (calcA.daily > calcB.daily) {
     badge.textContent = getText("compHigherA").replace("{diff}", `${formatINR(diffDaily)} ${getText("perDaySuffix")}`);
   } else {
     badge.textContent = getText("compHigherB").replace("{diff}", `${formatINR(diffDaily)} ${getText("perDaySuffix")}`);
@@ -2678,9 +3233,6 @@ function handleCalculate(event) {
   if (event) event.preventDefault();
   const calc = computeCalculation($("amount").value, $("days").value, $("board").value);
   if (!calc) {
-    // Never leave an older calculation looking like the result of invalid inputs.
-    lastResult = null;
-    $("resultSection").classList.remove("show");
     $("errorBox").style.display = "block";
     return;
   }
@@ -2855,6 +3407,138 @@ function triggerBlobDownload(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 3000);
 }
 
+let deferredInstallPrompt = null;
+let currentInstallPlatform = "android";
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const banner = $("nativeInstallBanner");
+  if (banner) banner.classList.remove("hidden");
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  const banner = $("nativeInstallBanner");
+  if (banner) banner.classList.add("hidden");
+});
+
+function syncBodyModalLock() {
+  const anyOpen =
+    $("previewModal").classList.contains("open") ||
+    $("installGuideModal").classList.contains("open");
+  document.body.classList.toggle("modal-open", anyOpen);
+}
+
+function stopVoiceExplanation() {
+  try {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  } catch (_) {}
+  const stopBtn = $("stopVoiceBtn");
+  if (stopBtn) stopBtn.classList.add("hidden");
+  const statusEl = $("voiceStatusText");
+  if (statusEl) statusEl.textContent = getText("voiceHint");
+}
+
+function playVoiceExplanation() {
+  const statusEl = $("voiceStatusText");
+  const stopBtn = $("stopVoiceBtn");
+
+  if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+    if (statusEl) statusEl.textContent = getText("voiceUnsupported");
+    return;
+  }
+
+  // Keep this action directly inside the user's click event for mobile browsers.
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  synth.resume();
+
+  const useHindiVoice = currentLanguage !== "en";
+  const scriptKey = currentInstallPlatform === "ios" ? "voiceScriptIos" : "voiceScriptAndroid";
+  const textToSpeak = useHindiVoice
+    ? (translations.hi[scriptKey] || getText(scriptKey))
+    : (translations.en[scriptKey] || getText(scriptKey));
+
+  if (!textToSpeak) {
+    if (statusEl) statusEl.textContent = getText("voiceUnsupported");
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  utterance.lang = useHindiVoice ? "hi-IN" : "en-IN";
+  utterance.rate = 0.92;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  // Voices may load late on Android Chrome. Prefer a matching voice if available,
+  // but do not block speech if the voice list is empty.
+  const voices = synth.getVoices ? synth.getVoices() : [];
+  const prefix = useHindiVoice ? "hi" : "en";
+  const matchedVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(prefix));
+  if (matchedVoice) {
+    utterance.voice = matchedVoice;
+    utterance.lang = matchedVoice.lang;
+  }
+
+  utterance.onstart = () => {
+    if (stopBtn) stopBtn.classList.remove("hidden");
+    if (statusEl) statusEl.textContent = getText("voicePlaying");
+  };
+  utterance.onend = () => {
+    if (stopBtn) stopBtn.classList.add("hidden");
+    if (statusEl) statusEl.textContent = getText("voiceHint");
+  };
+  utterance.onerror = (event) => {
+    if (stopBtn) stopBtn.classList.add("hidden");
+    // Show a useful message instead of silently pretending audio is playing.
+    if (statusEl) {
+      statusEl.textContent = event && event.error
+        ? "Voice playback error: " + event.error + ". Check your phone's Text-to-Speech settings."
+        : getText("voiceUnsupported");
+    }
+  };
+
+  if (stopBtn) stopBtn.classList.remove("hidden");
+  if (statusEl) statusEl.textContent = getText("voicePlaying");
+  synth.speak(utterance);
+
+    // Some Android WebView/Chrome builds need resume() after speak().
+  synth.resume();
+}
+
+function switchInstallPlatformTab(platform) {
+  currentInstallPlatform = platform === "ios" ? "ios" : "android";
+  const isAndroid = currentInstallPlatform === "android";
+  $("tabAndroidBtn").classList.toggle("active", isAndroid);
+  $("tabAndroidBtn").setAttribute("aria-selected", isAndroid ? "true" : "false");
+  $("tabIosBtn").classList.toggle("active", !isAndroid);
+  $("tabIosBtn").setAttribute("aria-selected", !isAndroid ? "true" : "false");
+  $("panelAndroid").classList.toggle("hidden", !isAndroid);
+  $("panelIos").classList.toggle("hidden", isAndroid);
+  stopVoiceExplanation();
+}
+
+function openInstallGuideModal() {
+  const ua = (navigator.userAgent || "").toLowerCase();
+  if (/iphone|ipad|ipod/.test(ua)) {
+    switchInstallPlatformTab("ios");
+  } else {
+    switchInstallPlatformTab("android");
+  }
+  $("installGuideModal").classList.add("open");
+  syncBodyModalLock();
+  $("closeInstallModalBtn").focus();
+}
+
+function closeInstallGuideModal() {
+  stopVoiceExplanation();
+  $("installGuideModal").classList.remove("open");
+  syncBodyModalLock();
+}
+
 function openImageModal() {
   if (!lastResult) return;
   const canvas = renderStatusCanvas();
@@ -2864,6 +3548,7 @@ function openImageModal() {
   $("modalImageContainer").classList.remove("hidden");
   $("modalTextContainer").classList.add("hidden");
   $("previewModal").classList.add("open");
+  syncBodyModalLock();
 
   canvas.toBlob(blob => {
     lastGeneratedBlob = blob;
@@ -2882,6 +3567,7 @@ function openLetterModal() {
   $("modalTextContainer").classList.remove("hidden");
   $("modalImageContainer").classList.add("hidden");
   $("previewModal").classList.add("open");
+  syncBodyModalLock();
 
   const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
   triggerBlobDownload(blob, "meterhisab-ledger-verification-request.txt");
@@ -2890,6 +3576,7 @@ function openLetterModal() {
 
 function closeModal() {
   $("previewModal").classList.remove("open");
+  syncBodyModalLock();
 }
 
 // Event Listeners Registration
@@ -3014,7 +3701,7 @@ $("shareImgDirectBtn").addEventListener("click", async () => {
       if (err && err.name === "AbortError") return;
     }
   }
-    const waUrl = "https://wa.me/?text=" + encodeURIComponent(buildShareMessage());
+  const waUrl = "https://wa.me/?text=" + encodeURIComponent(buildShareMessage());
   window.open(waUrl, "_blank", "noopener,noreferrer");
 });
 
@@ -3042,6 +3729,45 @@ $("copyTxtDirectBtn").addEventListener("click", async () => {
     showToast(getText("copiedToast"));
   } catch (_) {}
 });
+
+$("openInstallGuideBtn").addEventListener("click", openInstallGuideModal);
+
+$("closeInstallModalBtn").addEventListener("click", closeInstallGuideModal);
+
+$("installGuideModal").addEventListener("click", e => {
+  if (e.target === $("installGuideModal")) closeInstallGuideModal();
+});
+
+$("tabAndroidBtn").addEventListener("click", () => switchInstallPlatformTab("android"));
+
+$("tabIosBtn").addEventListener("click", () => switchInstallPlatformTab("ios"));
+
+$("listenInstructionsBtn").addEventListener("click", playVoiceExplanation);
+
+$("stopVoiceBtn").addEventListener("click", stopVoiceExplanation);
+
+$("triggerNativeInstallBtn").addEventListener("click", async () => {
+  if (!deferredInstallPrompt) return;
+  try {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+  } catch (_) {}
+  deferredInstallPrompt = null;
+  $("nativeInstallBanner").classList.add("hidden");
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    if ($("installGuideModal").classList.contains("open")) closeInstallGuideModal();
+    if ($("previewModal").classList.contains("open")) closeModal();
+  }
+});
+
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+  });
+}
 
 // Initialize on load
 loadHistoryFromStorage();
